@@ -1,5 +1,26 @@
 # Convención de Ramas - Equipo Backend
 
+## Rama Principal de Desarrollo
+- `back-develop`: Para el desarrollo del backend.
+  - Esta rama sirve como integradores para el equipo, permitiendo que las funcionalidades estén completamente desarrolladas y probadas antes de fusionarse con main.
+
+- `main`: Esta rama refleja la versión estable y lista para producción de todo el proyecto, tanto frontend como backend.
+  - Idealmente, ningún código se debería fusionar directamente aquí sin pasar por un proceso de revisión y pruebas.
+
+### Feature Branches:
+- **Backend Features (`back/feature/...`)**: Estas ramas se crean desde `back-develop` para trabajar en nuevas funcionalidades del backend.
+
+### Flujo de Trabajo Sugerido:
+1) **Crear Feature Branch:**
+   - Cuando inicias una nueva funcionalidad en el backend, creas una rama como `back/feature/nombre-feature` a partir de `back-develop`.
+2) **Desarrollo y Pruebas:**
+   - Desarrollas la funcionalidad en la feature branch y realizas las pruebas necesarias.
+3) **Merge a Develop:**
+   - Una vez completada y probada la funcionalidad, haces un pull request (PR) para fusionar la rama `back/feature/nombre-feature` en `back-develop`.
+   - El código en `back-develop` debería ser estable y estar listo para ser integrado con otras funcionalidades.
+4) **Preparación para Release:**
+   - Cuando se tenga una versión estable en `back-develop`, y se considere que está lista para ser integrada en la rama `main`, se fusiona `back-develop` con `main` o con una `rama release`, dependiendo del flujo de trabajo.
+
 ## Estructura de Ramas
 
 ### Convención de Ramas con:
