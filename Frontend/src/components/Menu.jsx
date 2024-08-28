@@ -8,6 +8,9 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import PersonIcon from "@mui/icons-material/Person";
+import { Link } from "react-router-dom";
+import "./Menu.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,37 +54,39 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function Menu() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className="navbar">
+          {/* <Link to="/"> */}
+          <IconButton>
+            <img
+              className="logo-image"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAtFBMVEX/////2eD/mK7/orb/8vT/s8P/ImP/NWz/JmT/6Oz/QHL/d5b/h6H/PHD/THr/a47/7/L/ztf/LWj/+/H/9+P/vcv/23j/yQD/zSf/5qX/ygD/zB//qbv/xND/1Vj/WYL/2W//jab/2uH/9Nv/6bD/8c//0UT/67v/5qT/zzj//vr/34jl8v2t0PTQ4/kIjecAiudjqu2eyfQdkei51/eIvPD/4pb/aIsAguU3men/nbL1+f5QF5s7AAABRElEQVR4AZXRBY4DMRBE0QoaNkz2TpiZObn/vXbcHUbtE2taJesP/ikQDIXxQSQqhFR4Kyy11uIHb8WEfxBP4B0V1T4RwzvJuDuIpvBGWtJAEO8kaCADZHN4JZ+h7xEUjLGvTuJuIK7x61lbtHhSEjRQRqVorTXPE/TCeBWo0UEWD+o0IBtA0xSLXuF1ozhVbtYqLeQ+N2p7xrRwI8CN6mBZ457RxFX13Ii1PP+g2MFFmRqJEhi67sB6XZxpahTHRdGSSyOOnMdFiyd6YJlzo6t+kS4GcILcKIAbbeMOikP4UtwoiVv8R7j4DzdSo/HVBDmeqAGNc6PpbHoxm6PAE03wgBwspssbs1X2PEHfRQiz5a3pGhuPLrD1L+ICax44m40B6l1BIypEND3aTW/N9i64KRZNE1CHg8JxfWcMp7nZ5PDVH/PFLzlx4bGwAAAAAElFTkSuQmCC"
+              alt="logo"
+            />
+          </IconButton>
+          {/* //</Link> */}
+
+          <Search sx={{ flexGrow: 1, mr: 2 }}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Restaurants"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <PersonIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
         </Toolbar>
       </AppBar>
     </Box>

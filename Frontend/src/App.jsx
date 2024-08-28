@@ -1,21 +1,25 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Menu from "./components/Menu";
+import { Home } from "./pages/Home.jsx";
 import "./App.css";
-import { Home } from "./pages/Home";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-      </Routes>
-    </Router>
+    <>
+      <Menu />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route></Route>
+          <Route></Route>
+          <Route></Route>
+          <Route></Route>
+          <Route></Route>
+          <Route></Route>
+        </Routes>
+      </Router>
+    </>
   );
 }
 
