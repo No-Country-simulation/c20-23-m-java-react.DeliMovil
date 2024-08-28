@@ -1,13 +1,15 @@
 package com.delimovil.backend.services.interfaces;
 
+import com.delimovil.backend.dto.RestaurantDTO;
+import com.delimovil.backend.dto.ResturantCreateDTO;
 import com.delimovil.backend.models.entity.Restaurant;
 
 import java.util.List;
 
 public interface IRestaurantService {
-    List<Restaurant> findAll();
-    Restaurant findById(Integer id);
-    Restaurant save(Restaurant restaurant);
-    Restaurant update(Restaurant restaurant);
+    List<RestaurantDTO> findAll();
+    RestaurantDTO findById(Integer id);
+    RestaurantDTO save(ResturantCreateDTO restaurantDTO);
+    RestaurantDTO update(ResturantCreateDTO restaurant, Integer id);
     void deleteById(Integer id);
 }

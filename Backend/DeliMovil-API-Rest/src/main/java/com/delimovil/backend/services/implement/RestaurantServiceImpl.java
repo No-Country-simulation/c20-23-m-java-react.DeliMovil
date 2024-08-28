@@ -1,15 +1,19 @@
 package com.delimovil.backend.services.implement;
 
+import com.delimovil.backend.dto.RestaurantDTO;
+import com.delimovil.backend.dto.ResturantCreateDTO;
 import com.delimovil.backend.models.entity.Restaurant;
 import com.delimovil.backend.repositories.IRestaurantRepository;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RestaurantServiceImpl implements IRestaurantService {
@@ -17,30 +21,50 @@ public class RestaurantServiceImpl implements IRestaurantService {
     @Autowired
     private IRestaurantRepository restaurantRepository;
 
+    @Autowired
+    private ModelMapper mapper;
+
     @Override
     @Transactional(readOnly = true)
-    public List<Restaurant> findAll() {
-        return this.restaurantRepository.findAll();
+    public List<RestaurantDTO> findAll() {
+        return this.restaurantRepository.findAll()
+                .stream()
+                .map(res -> mapper.map(res, RestaurantDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Restaurant findById(Integer id) {
-        return restaurantRepository.findById(id).orElseThrow(
+    public RestaurantDTO findById(Integer id) {
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Restaurant.class.getSimpleName())
         );
+
+        return mapper.map(restaurant, RestaurantDTO.class);
     }
 
     @Override
     @Transactional
-    public Restaurant save(Restaurant restaurant) {
-        return this.restaurantRepository.save(restaurant);
+    public RestaurantDTO save(ResturantCreateDTO restaurantDTO) {
+        Restaurant restaurant = mapper.map(restaurantDTO, Restaurant.class);
+        Restaurant saveRestaurant = this.restaurantRepository.save(restaurant);
+
+        return mapper.map(saveRestaurant, RestaurantDTO.class);
     }
 
     @Override
     @Transactional
-    public Restaurant update(Restaurant restaurant) {
-        return this.restaurantRepository.save(restaurant);
+    public RestaurantDTO update(ResturantCreateDTO restaurantDTO, Integer id) {
+        Restaurant restaurantBD = this.restaurantRepository.findById(id).orElseThrow(
+                () -> new ModelNotFoundException(id, Restaurant.class.getSimpleName())
+        );
+
+        restaurantBD.setName(restaurantDTO.getName());
+        restaurantBD.setDescription(restaurantDTO.getDescription());
+
+        Restaurant updatedRestaurant = this.restaurantRepository.save(restaurantBD);
+
+        return mapper.map(updatedRestaurant, RestaurantDTO.class);
     }
 
     @Override

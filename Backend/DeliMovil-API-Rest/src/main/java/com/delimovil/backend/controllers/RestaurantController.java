@@ -1,5 +1,7 @@
 package com.delimovil.backend.controllers;
 
+import com.delimovil.backend.dto.RestaurantDTO;
+import com.delimovil.backend.dto.ResturantCreateDTO;
 import com.delimovil.backend.models.entity.Restaurant;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
 import org.apache.coyote.Response;
@@ -17,26 +19,31 @@ public class RestaurantController {
     private IRestaurantService restaurantService;
 
     @GetMapping
-    public ResponseEntity<List<Restaurant>> findAllRestaurants() {
+    public ResponseEntity<List<RestaurantDTO>> findAllRestaurants() {
         return ResponseEntity.ok(restaurantService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> findRestaurantById(@PathVariable Integer id) {
+    public ResponseEntity<RestaurantDTO> findRestaurantById(@PathVariable Integer id) {
         return ResponseEntity.ok(restaurantService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<RestaurantDTO> createRestaurant(@RequestBody ResturantCreateDTO restaurant) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
     }
 
-    @PatchMapping
-    public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant){
-        return ResponseEntity.ok(restaurantService.update(restaurant));
+    @PatchMapping("/{id}")
+    public ResponseEntity<RestaurantDTO> updateRestaurant(
+            @RequestBody ResturantCreateDTO restaurant,
+            @PathVariable Integer id
+    ) {
+        return ResponseEntity.ok(restaurantService.update(restaurant, id));
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteRestaurant(@PathVariable Integer id){
         this.restaurantService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
