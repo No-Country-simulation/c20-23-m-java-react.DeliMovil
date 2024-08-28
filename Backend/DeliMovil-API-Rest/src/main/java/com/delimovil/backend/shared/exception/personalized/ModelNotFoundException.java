@@ -6,7 +6,7 @@ public class ModelNotFoundException extends RuntimeException{
     }
 
     public ModelNotFoundException(Integer idNotFound, String nameModel) {
-        super(String.format("The object was not found.\nid not found: %d\nName Model: %s",
+        super(String.format("The object was not found - id not found: %d - Name Model: %s",
                 idNotFound, nameModel));
     }
 }
