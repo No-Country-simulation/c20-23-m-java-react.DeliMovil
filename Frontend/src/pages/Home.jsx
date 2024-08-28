@@ -10,7 +10,9 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "center",
   color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {}),
+  ...theme.applyStyles("dark", {
+    backgroundColor: "#1A2027",
+  }),
 }));
 
 export function Home() {
@@ -20,7 +22,7 @@ export function Home() {
         container
         spacing={{ xs: 2, md: 2 }}
         columns={{ xs: 4, sm: 8, md: 4 }}
-        padding={{ xs: 1, sm: 2, md: 3 }}
+        padding={{ xs: 1, sm: 2, md: 6 }}
       >
         {Array.from(Array(6)).map((_, index) => (
           <Grid item xs={2} sm={4} md={2} key={index}>

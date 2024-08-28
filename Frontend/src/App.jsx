@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Menu from "./components/Menu";
 import { Home } from "./pages/Home.jsx";
 import "./App.css";
+import { Menu } from "./components/Menu.jsx";
 
 function App() {
   return (
@@ -11,8 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route></Route>
-          <Route></Route>
+          <Route element={<Menu />} />
           <Route></Route>
           <Route></Route>
           <Route></Route>
