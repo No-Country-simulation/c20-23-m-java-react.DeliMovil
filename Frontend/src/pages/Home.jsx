@@ -3,11 +3,12 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Tarjeta from "../components/Card";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#fff",
+  backgroundColor: "transparent",
   ...theme.typography.body2,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
   ...theme.applyStyles("dark", {
@@ -21,12 +22,14 @@ export function Home() {
       <Grid
         container
         spacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 4, sm: 8, md: 4 }}
-        padding={{ xs: 1, sm: 2, md: 6 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        padding={{ xs: 1, sm: 2, md: 2 }}
       >
         {Array.from(Array(6)).map((_, index) => (
           <Grid item xs={2} sm={4} md={2} key={index}>
-            <Item>Mr.B</Item>
+            <Item>
+              <Tarjeta />
+            </Item>
           </Grid>
         ))}
       </Grid>

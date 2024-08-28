@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home.jsx";
-import "./App.css";
+import "./Styles/App.css";
 import { Menu } from "./components/Menu.jsx";
 
 function App() {
