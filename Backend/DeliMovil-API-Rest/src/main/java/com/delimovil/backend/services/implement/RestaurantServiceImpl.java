@@ -1,7 +1,7 @@
 package com.delimovil.backend.services.implement;
 
 import com.delimovil.backend.dto.RestaurantDTO;
-import com.delimovil.backend.dto.ResturantCreateDTO;
+import com.delimovil.backend.dto.ResturantRequestDTO;
 import com.delimovil.backend.models.entity.Restaurant;
 import com.delimovil.backend.repositories.IRestaurantRepository;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
@@ -45,7 +45,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Override
     @Transactional
-    public RestaurantDTO save(ResturantCreateDTO restaurantDTO) {
+    public RestaurantDTO save(ResturantRequestDTO restaurantDTO) {
         Restaurant restaurant = mapper.map(restaurantDTO, Restaurant.class);
         Restaurant saveRestaurant = this.restaurantRepository.save(restaurant);
 
@@ -54,7 +54,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Override
     @Transactional
-    public RestaurantDTO update(ResturantCreateDTO restaurantDTO, Integer id) {
+    public RestaurantDTO update(ResturantRequestDTO restaurantDTO, Integer id) {
         Restaurant restaurantBD = this.restaurantRepository.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Restaurant.class.getSimpleName())
         );

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResturantCreateDTO {
+public class ResturantRequestDTO {
     private String name;
     private String description;
 }

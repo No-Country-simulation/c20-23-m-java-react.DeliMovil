@@ -1,10 +1,8 @@
 package com.delimovil.backend.controllers;
 
 import com.delimovil.backend.dto.RestaurantDTO;
-import com.delimovil.backend.dto.ResturantCreateDTO;
-import com.delimovil.backend.models.entity.Restaurant;
+import com.delimovil.backend.dto.ResturantRequestDTO;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +28,13 @@ public class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<RestaurantDTO> createRestaurant(@RequestBody ResturantCreateDTO restaurant) {
+    public ResponseEntity<RestaurantDTO> createRestaurant(@RequestBody ResturantRequestDTO restaurant) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<RestaurantDTO> updateRestaurant(
-            @RequestBody ResturantCreateDTO restaurant,
+            @RequestBody ResturantRequestDTO restaurant,
             @PathVariable Integer id
     ) {
         return ResponseEntity.ok(restaurantService.update(restaurant, id));
