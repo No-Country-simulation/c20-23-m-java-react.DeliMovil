@@ -10,22 +10,21 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "center",
   color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {
-    backgroundColor: "#1A2027",
-  }),
+  ...theme.applyStyles("dark", {}),
 }));
 
 export function Home() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className="box-grid" sx={{ flexGrow: 1 }}>
       <Grid
         container
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        spacing={{ xs: 2, md: 2 }}
+        columns={{ xs: 4, sm: 8, md: 4 }}
+        padding={{ xs: 1, sm: 2, md: 3 }}
       >
         {Array.from(Array(6)).map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <Item>xs=2</Item>
+          <Grid item xs={2} sm={4} md={2} key={index}>
+            <Item>Mr.B</Item>
           </Grid>
         ))}
       </Grid>
