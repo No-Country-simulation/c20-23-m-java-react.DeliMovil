@@ -6,19 +6,12 @@ import { Menu } from "./components/Menu.jsx";
 
 function App() {
   return (
-    <>
+    <Router>
       <Menu />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route element={<Menu />} />
-          <Route></Route>
-          <Route></Route>
-          <Route></Route>
-          <Route></Route>
-        </Routes>
-      </Router>
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
