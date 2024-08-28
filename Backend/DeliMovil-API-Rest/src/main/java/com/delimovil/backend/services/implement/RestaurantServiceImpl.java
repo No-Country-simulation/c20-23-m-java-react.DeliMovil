@@ -3,6 +3,7 @@ package com.delimovil.backend.services.implement;
 import com.delimovil.backend.models.entity.Restaurant;
 import com.delimovil.backend.repositories.IRestaurantRepository;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
+import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,9 @@ public class RestaurantServiceImpl implements IRestaurantService {
     @Override
     @Transactional(readOnly = true)
     public Restaurant findById(Integer id) {
-        return restaurantRepository.findById(id).orElseThrow(); //Lanzar exception personalizada
+        return restaurantRepository.findById(id).orElseThrow(
+                () -> new ModelNotFoundException(id, Restaurant.class.getSimpleName())
+        );
     }
 
     @Override
@@ -45,7 +48,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
     public void deleteById(Integer id) {
         Optional<Restaurant> restaurant = this.restaurantRepository.findById(id);
         if (restaurant.isEmpty()){
-            throw new RuntimeException("El id no existe"); //Reemplazar por una exception personalizada
+            throw new ModelNotFoundException(id, Restaurant.class.getSimpleName());
         }
         this.restaurantRepository.deleteById(id);
     }
