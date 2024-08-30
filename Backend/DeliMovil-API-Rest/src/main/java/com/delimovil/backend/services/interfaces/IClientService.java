@@ -1,15 +1,18 @@
 package com.delimovil.backend.services.interfaces;
 
-import com.delimovil.backend.models.entity.Client;
+import com.delimovil.backend.dto.ClientDTO;
+import com.delimovil.backend.dto.ClientRequestDTO;
 
 import java.util.List;
 
 public interface IClientService {
 
-    public List<Client> getClients();
-    public void saveClient(Client client);
-    public void deleteClient(int id);
-    public Client getClient(int id);
-    public void editClient(Client client);
+    public List<ClientDTO> findAll();
+    public ClientDTO findById(Integer id);
+    public ClientDTO save(ClientRequestDTO clientDTO);
+    public ClientDTO update(ClientRequestDTO client, Integer id);
+    public void deleteById(Integer id);
+
+
     
 }
