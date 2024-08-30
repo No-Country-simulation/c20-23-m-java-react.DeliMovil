@@ -13,29 +13,29 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ClientRequestDTO {
     @NotBlank
-    @Size(min = 2, max = 40)
+    @Size(min = 2, max = 45)
     private String first_name;
     @NotBlank
-    @Size(min = 2, max = 40)
+    @Size(min = 2, max = 45)
     private String last_name;
 
     @NotBlank
-    @Size(min = 6, max = 10)
+    @Size(min = 6, max = 20)
     private String phone;
     @NotBlank
-    @Size(min = 6, max = 200)
+    @Size(min = 6, max = 45)
     private String latitude;
     @NotBlank
-    @Size(min = 6, max = 200)
+    @Size(min = 6, max = 45)
     private String longitude;
     @NotBlank
     @Size(min = 3, max = 45)
     private String name_street;
 
     @NotBlank
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 45)
     private String number_street;
     @NotBlank
-    @Size(min = 1, max = 3)
+    @Size(min = 1, max = 5)
     private String floor_department;
 }
