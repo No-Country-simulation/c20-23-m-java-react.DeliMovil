@@ -24,8 +24,9 @@ public class DeliveryDTO {
         return id;
     }
 
-    public void setId(int id)
-    {this.id = id;}
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getFirstname(){
         return firstname;
