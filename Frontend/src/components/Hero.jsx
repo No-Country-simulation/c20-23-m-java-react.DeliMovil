@@ -12,6 +12,7 @@ import { styled } from "@mui/material/styles";
 import Grilla from "./Grilla";
 import Card from "./Card";
 import { Grid } from "@mui/material";
+import Tarjeta from "./Card";
 
 const StyledBox = styled("div")(({ theme }) => ({
   alignSelf: "center",
@@ -126,7 +127,6 @@ export default function Hero() {
               fontSize: "clamp(3rem, 10vw, 3.5rem)",
             }}
           >
-            <Card />
             <Typography
               component="span"
               variant="h1"
@@ -138,7 +138,7 @@ export default function Hero() {
                 }),
               })}
             >
-              <Card />
+              <Tarjeta />
             </Typography>
           </Typography>
           <Typography
@@ -154,7 +154,10 @@ export default function Hero() {
             direction={{ xs: "column", sm: "row" }}
             spacing={1}
             useFlexGap
-            sx={{ width: { xs: "100%", sm: "350px" } }}
+            sx={{
+              width: { xs: "100%", sm: "350px" },
+              justifyContent: "center",
+            }}
           >
             <Button
               variant="contained"
@@ -175,7 +178,6 @@ export default function Hero() {
             <Link href="#" color="primary">
               Terminos y condiciones
             </Link>
-            .
           </Typography>
         </Stack>
         <StyledBox id="image">

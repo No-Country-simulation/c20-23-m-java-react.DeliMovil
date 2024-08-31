@@ -52,11 +52,11 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
+  margin: "0 auto", // Center horizontally
   width: "100%",
+  maxWidth: 400, // Limit the max width for better appearance
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
+    margin: "0 auto",
     width: "auto",
   },
 }));
@@ -73,6 +73,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false); // Estado de autenticación
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -141,12 +142,25 @@ export default function Navbar() {
               alignItems: "center",
             }}
           >
-            <Button color="primary" variant="text" size="small">
-              Sign in
-            </Button>
-            <Button color="primary" variant="contained" size="small">
-              Sign up
-            </Button>
+            {isAuthenticated ? (
+              <>
+                <Button color="primary" variant="text" size="small">
+                  My profile
+                </Button>
+                <Button color="primary" variant="contained" size="small">
+                  Sign out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button color="primary" variant="text" size="small">
+                  Sign in
+                </Button>
+                <Button color="primary" variant="contained" size="small">
+                  Sign up
+                </Button>
+              </>
+            )}
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
@@ -172,16 +186,33 @@ export default function Navbar() {
                 <MenuItem>Pricing</MenuItem>
                 <MenuItem>FAQ</MenuItem>
                 <MenuItem>Blog</MenuItem>
-                <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
-                    Sign up
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
-                    Sign in
-                  </Button>
-                </MenuItem>
+                {isAuthenticated ? (
+                  <>
+                    <MenuItem>
+                      <Button color="primary" variant="contained" fullWidth>
+                        Sign out
+                      </Button>
+                    </MenuItem>
+                    <MenuItem>
+                      <Button color="primary" variant="text" fullWidth>
+                        My profile
+                      </Button>
+                    </MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuItem>
+                      <Button color="primary" variant="contained" fullWidth>
+                        Sign up
+                      </Button>
+                    </MenuItem>
+                    <MenuItem>
+                      <Button color="primary" variant="outlined" fullWidth>
+                        Sign in
+                      </Button>
+                    </MenuItem>
+                  </>
+                )}
               </Box>
             </Drawer>
           </Box>

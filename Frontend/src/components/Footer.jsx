@@ -206,15 +206,6 @@ export default function Foot() {
           >
             <TwitterIcon />
           </IconButton>
-          <IconButton
-            color="inherit"
-            size="small"
-            href="https://www.linkedin.com/company/mui/"
-            aria-label="LinkedIn"
-            sx={{ alignSelf: "center" }}
-          >
-            <LinkedInIcon />
-          </IconButton>
         </Stack>
       </Box>
     </Container>
