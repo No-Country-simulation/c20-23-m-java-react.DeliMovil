@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 
 // Styled components
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: theme.palette.text.primary,
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
@@ -48,13 +48,23 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(
+    theme.palette.mode === "light"
+      ? theme.palette.grey[400]
+      : theme.palette.common.white,
+    0.25
+  ),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(
+      theme.palette.mode === "light"
+        ? theme.palette.grey[500]
+        : theme.palette.common.white,
+      0.35
+    ),
   },
-  margin: "0 auto", // Center horizontally
+  margin: "0 auto",
   width: "100%",
-  maxWidth: 400, // Limit the max width for better appearance
+  maxWidth: 400,
   [theme.breakpoints.up("sm")]: {
     margin: "0 auto",
     width: "auto",
@@ -69,11 +79,12 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: theme.palette.text.primary,
 }));
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false); // Estado de autenticación
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
