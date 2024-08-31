@@ -117,7 +117,7 @@ export default function Navbar() {
                   <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                  placeholder="Search…"
+                  placeholder="Restaurants"
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>

@@ -7,11 +7,11 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
 import Grilla from "./Grilla";
 import Card from "./Card";
+import { Grid } from "@mui/material";
 
 const StyledBox = styled("div")(({ theme }) => ({
   alignSelf: "center",
@@ -37,6 +37,56 @@ const StyledBox = styled("div")(({ theme }) => ({
     borderColor: theme.palette.grey[700],
   }),
 }));
+
+const cardData = [
+  {
+    title: "Big Mac",
+    description:
+      "La icónica hamburguesa de McDonald's con dos carnes y salsa especial.",
+    image:
+      "https://resizer.glanacion.com/resizer/v2/el-indice-big-mac-revela-en-que-pais-del-mundo-se-EQEVALWJCFGLNOITX2MOB3QE5Q.jpg?auth=43edc0d8f943d6c4fcfd84441ad1d88f919189cdbcbf04e2b2ba9bb6af9cff65&width=768&quality=70&smart=false",
+    alt: "Big Mac",
+  },
+  {
+    title: "Pizza Kentucky",
+    description:
+      "Deliciosa pizza con abundante queso y pepperoni de Kentucky Pizza.",
+    image:
+      "https://images.rappi.com.ar/restaurants_background/kentuchy-1660252210340.jpg",
+    alt: "Pizza Kentucky",
+  },
+  {
+    title: "Whopper",
+    description:
+      "La clásica Whopper de Burger King, con todo el sabor a la parrilla.",
+    image:
+      "https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.latam/files/BK_Web_WHOPPER_500X540px.png",
+    alt: "Whopper",
+  },
+  {
+    title: "Subway Melt",
+    description: "Subway Melt con jamón, pavo, tocino y queso derretido.",
+    image:
+      "https://orders.subway-tt.com/uploads/images/products/large/hungrrrcaribbeanpartner_subwaymelt_1594062988SUBWAYMELT.png",
+    alt: "Subway Melt",
+  },
+  {
+    title: "Taco Bell Crunchwrap",
+    description:
+      "El famoso Crunchwrap Supreme de Taco Bell, crujiente y delicioso.",
+    image:
+      "https://www.chefpriyanka.com/wp-content/uploads/2020/05/Chicken-Bacon-Ranch-Crunchwrap-Product-Image.jpg",
+    alt: "Crunchwrap",
+  },
+  {
+    title: "KFC Chicken Bucket",
+    description:
+      "El clásico bucket de pollo frito de KFC, crujiente y sabroso.",
+    image:
+      "https://as2.ftcdn.net/v2/jpg/03/03/41/07/1000_F_303410716_wknBjLSM97kvPaNdYneN8CMWrkp2OVOB.jpg",
+    alt: "KFC Chicken Bucket",
+  },
+];
 
 export default function Hero() {
   return (
@@ -129,7 +179,20 @@ export default function Hero() {
           </Typography>
         </Stack>
         <StyledBox id="image">
-          <Grilla />
+          <Box sx={{ flexGrow: 1, mt: 4, ml: 2 }}>
+            <Grid container spacing={2}>
+              {cardData.map((card, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Grilla
+                    title={card.title}
+                    description={card.description}
+                    image={card.image}
+                    alt={card.alt}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
         </StyledBox>
       </Container>
     </Box>
