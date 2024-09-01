@@ -19,23 +19,23 @@ public class ClientController {
     @Autowired
     private IClientService clientService;
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<ClientDTO>> findAllClients(){
         return ResponseEntity.ok(clientService.findAll());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ClientDTO> findClientById(@PathVariable @Min(1) Integer id){
         return ResponseEntity.ok(clientService.findById(id));
     }
 
-    @PostMapping("/create")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public  ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientRequestDTO client){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
     }
 
-    @PatchMapping("/edit/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<ClientDTO> updateClient(
             @RequestBody ClientRequestDTO client,
             @PathVariable @Min(1) Integer id
@@ -44,7 +44,7 @@ public class ClientController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteClient(@PathVariable @Min(1) Integer id){
         clientService.deleteById(id);

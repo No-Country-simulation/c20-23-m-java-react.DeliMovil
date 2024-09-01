@@ -6,10 +6,10 @@ import com.delimovil.backend.models.entity.Client;
 import com.delimovil.backend.repositories.IClientRepository;
 import com.delimovil.backend.services.interfaces.IClientService;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class ClientServiceImpl implements IClientService {
     @Autowired
     private ModelMapper mapper;
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ClientDTO> findAll() {
         return this.clientRepo.findAll()
                 .stream()
@@ -31,7 +31,7 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public ClientDTO findById(Integer id) {
         Client client = clientRepo.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Client.class.getSimpleName())
