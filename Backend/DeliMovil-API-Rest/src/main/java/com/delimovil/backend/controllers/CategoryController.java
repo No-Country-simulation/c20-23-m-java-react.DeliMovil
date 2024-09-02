@@ -1,5 +1,6 @@
 package com.delimovil.backend.controllers;
 
+import com.delimovil.backend.dto.CategoryDto;
 import com.delimovil.backend.dto.CategoryRequestDto;
 import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.services.interfaces.ICategoryService;
@@ -22,25 +23,25 @@ public class CategoryController {
 
 
     @GetMapping
-    public ResponseEntity<List<Category>> getAll(){
-        List<Category> list = categoryService.getAll();
+    public ResponseEntity<List<CategoryDto>> getAll(){
+        List<CategoryDto> list = categoryService.getAll();
         return ResponseEntity.ok(list);
     }
     @GetMapping("/{name}")
-    public ResponseEntity<Category> getByName(@PathVariable String name){
-        Category category = categoryService.getByName(name);
+    public ResponseEntity<CategoryDto> getByName(@PathVariable String name){
+        CategoryDto category = categoryService.getByName(name);
         return ResponseEntity.ok(category);
     }
 
     @PostMapping
-    public ResponseEntity<Category> create(@Valid @RequestBody CategoryRequestDto request){
-        Category category = categoryService.create(request);
+    public ResponseEntity<CategoryDto> create(@Valid @RequestBody CategoryRequestDto request){
+        CategoryDto category = categoryService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
 
     }
     @PutMapping("/{categoryId}")
-    public ResponseEntity<Category> update(@Valid @RequestBody CategoryRequestDto request, @PathVariable @Min(1) Integer categoryId){
-        Category category = categoryService.update(request, categoryId);
+    public ResponseEntity<CategoryDto> update(@Valid @RequestBody CategoryRequestDto request, @PathVariable @Min(1) Integer categoryId){
+        CategoryDto category = categoryService.update(request, categoryId);
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
     }
 
