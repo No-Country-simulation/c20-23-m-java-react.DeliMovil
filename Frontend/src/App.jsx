@@ -7,8 +7,8 @@ import Navbar from "./components/Navbar.jsx";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
+import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -31,7 +31,7 @@ function App() {
           style={{ position: "absolute", top: 0, right: 0, padding: "30px" }}
         >
           <IconButton onClick={toggleDarkMode} color="inherit">
-            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            {darkMode ? <WbSunnyRoundedIcon /> : <ModeNightRoundedIcon />}
           </IconButton>
         </div>
         <Navbar />
