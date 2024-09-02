@@ -1,12 +1,12 @@
 package com.delimovil.backend.services.implement;
 
 import com.delimovil.backend.dto.CategoryRequest;
-import com.delimovil.backend.models.entity.CategoryModel;
+import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.repositories.ICategoryRepository;
 import com.delimovil.backend.services.interfaces.ICategoryService;
+import jakarta.transaction.Transactional;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,43 +21,48 @@ public class CategoryService implements ICategoryService {
     @Autowired
     private ICategoryRepository categoryRepository;
     @Override
-    public List<CategoryModel> getAll(){
+    public List<Category> getAll(){
         return categoryRepository.findAll();
     }
 
     @Override
-    public CategoryModel getByName(String name){
+    public Category getByName(String name){
         return categoryRepository.findByName(name);
     }
 
     @Override
-    public CategoryModel create(CategoryRequest request){
-        CategoryModel nameCategory = categoryRepository.findByName(request.getName());
+    @Transactional
+    public Category create(CategoryRequest request){
+        Category nameCategory = categoryRepository.findByName(request.getName());
         if (nameCategory != null){
             return null;
         }
-        CategoryModel categoryModel= new CategoryModel();
-        categoryModel.setName(request.getName());
-        categoryModel.setDescription(request.getDescription());
-        return categoryRepository.save(categoryModel);
+        Category category = new Category();
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+        return categoryRepository.save(category);
     }
 
     @Override
-    public CategoryModel update(CategoryRequest request, Long categoryId){
-        Optional<CategoryModel> optional = categoryRepository.findById(categoryId);
+    public Category update(CategoryRequest request, Integer categoryId){
+        Optional<Category> optional = categoryRepository.findById(categoryId);
         if (optional.isEmpty()){
             return null;
         }
-        CategoryModel categoryModel = optional.get();
-        categoryModel.setName(request.getName());
-        categoryModel.setDescription(request.getDescription());
-        return categoryRepository.save(categoryModel);
+        Category category = optional.get();
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+        return categoryRepository.save(category);
     }
 
     @Override
-    public String delete(Long categoryId){
-        CategoryModel categoryModel = categoryRepository.findById(categoryId).get();
-        categoryRepository.delete(categoryModel);
-        return "Succeed deleted";
+    public boolean delete(Integer categoryId){
+        Optional<Category> optional = categoryRepository.findById(categoryId);
+        if (optional.isEmpty()){
+            return false;
+        }
+        Category category = optional.get();
+        categoryRepository.delete(category);
+        return true;
     }
 }

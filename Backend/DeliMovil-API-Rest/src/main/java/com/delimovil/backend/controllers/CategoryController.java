@@ -1,7 +1,7 @@
 package com.delimovil.backend.controllers;
 
 import com.delimovil.backend.dto.CategoryRequest;
-import com.delimovil.backend.models.entity.CategoryModel;
+import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.services.interfaces.ICategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,46 +20,32 @@ public class CategoryController {
     private ICategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryModel>> getAll(){
-        List<CategoryModel> list = categoryService.getAll();
-        if (list.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    public ResponseEntity<List<Category>> getAll(){
+        List<Category> list = categoryService.getAll();
+
         return ResponseEntity.ok(list);
     }
     @GetMapping("/{name}")
-    public ResponseEntity<CategoryModel> getByName(@PathVariable String name){
-        CategoryModel categoryModel = categoryService.getByName(name);
-        if (categoryModel == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(categoryModel);
+    public ResponseEntity<Category> getByName(@PathVariable String name){
+        Category category = categoryService.getByName(name);
+        return ResponseEntity.ok(category);
     }
 
     @PostMapping
-    public ResponseEntity<CategoryModel> create(@Valid @RequestBody CategoryRequest request){
-        CategoryModel categoryModel = categoryService.create(request);
-        if (categoryModel == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(categoryModel);
+    public ResponseEntity<Category> create(@Valid @RequestBody CategoryRequest request){
+        Category category = categoryService.create(request);
+        return ResponseEntity.ok(category);
 
     }
     @PutMapping("/{categoryId}")
-    public ResponseEntity<CategoryModel> update(@Valid @RequestBody CategoryRequest request, @PathVariable Long categoryId){
-        CategoryModel categoryModel = categoryService.update(request, categoryId);
-        if(categoryModel == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-        return ResponseEntity.ok(categoryModel);
+    public ResponseEntity<Category> update(@Valid @RequestBody CategoryRequest request, @PathVariable Integer categoryId){
+        Category category = categoryService.update(request, categoryId);
+        return ResponseEntity.ok(category);
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<String> delete(@PathVariable Long categoryId){
-        String res = categoryService.delete(categoryId);
-        if (res.isEmpty()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    public ResponseEntity<Boolean> delete(@PathVariable Integer categoryId){
+        boolean res = categoryService.delete(categoryId);
         return ResponseEntity.ok(res);
     }
 

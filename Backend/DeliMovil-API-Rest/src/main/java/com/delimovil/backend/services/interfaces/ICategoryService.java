@@ -1,16 +1,16 @@
 package com.delimovil.backend.services.interfaces;
 
 import com.delimovil.backend.dto.CategoryRequest;
-import com.delimovil.backend.models.entity.CategoryModel;
+import com.delimovil.backend.models.entity.Category;
 
 import java.util.List;
 
 public interface ICategoryService {
-    List<CategoryModel> getAll();
-    CategoryModel getByName(String name);
+    List<Category> getAll();
+    Category getByName(String name);
 
-    CategoryModel create(CategoryRequest request);
-    CategoryModel update(CategoryRequest request, Long categoryId);
+    Category create(CategoryRequest request);
+    Category update(CategoryRequest request, Integer categoryId);
 
-    String delete(Long categoryId);
+    boolean delete(Integer categoryId);
 }
