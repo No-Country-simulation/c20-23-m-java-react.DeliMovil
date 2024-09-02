@@ -6,7 +6,6 @@ import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.repositories.ICategoryRepository;
 import com.delimovil.backend.services.interfaces.ICategoryService;
 
-import com.delimovil.backend.shared.exception.GeneralErrorResponse;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +34,7 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CategoryDto getByName(String name){
         Category category = categoryRepository.findByName(name);
         return modelMapper.map(category, CategoryDto.class);
@@ -79,11 +77,11 @@ public class CategoryService implements ICategoryService {
 
     @Override
     @Transactional
-    public boolean delete(Integer categoryId){
+    public void delete(Integer categoryId){
         Category category = categoryRepository.findById(categoryId).orElseThrow(
                 ()-> new ModelNotFoundException(categoryId, Category.class.getSimpleName())
         );
         categoryRepository.delete(category);
-        return true;
+
     }
 }
