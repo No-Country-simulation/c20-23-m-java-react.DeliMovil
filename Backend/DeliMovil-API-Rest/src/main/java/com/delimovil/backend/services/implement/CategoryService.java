@@ -6,6 +6,7 @@ import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.repositories.ICategoryRepository;
 import com.delimovil.backend.services.interfaces.ICategoryService;
 
+import com.delimovil.backend.shared.exception.personalized.ModelAlreadyExistsException;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +55,7 @@ public class CategoryService implements ICategoryService {
     public CategoryDto create(CategoryRequestDto request){
         Category nameCategory = categoryRepository.findByName(request.getName());
         if (nameCategory != null){
-             return null;
+             throw new ModelAlreadyExistsException(request.getName());
         }
         Category category = new Category();
         category.setName(request.getName());
