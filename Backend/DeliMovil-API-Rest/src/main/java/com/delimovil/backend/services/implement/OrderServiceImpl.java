@@ -52,6 +52,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO update(OrderRequestDTO orderDTO, Integer id) {
         Order orderBD = this.orderRepo.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Order.class.getSimpleName())
