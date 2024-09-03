@@ -73,31 +73,11 @@ const ListRestaurants = () => {
             >
               Ver mas
             </Button>
+            <Divider //variant="inset"
+              component="li"
+            />
           </ListItem>
         ))}
-        <Divider //variant="inset"
-          component="li"
-        />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Summer BBQ"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  sx={{ color: "text.primary", display: "inline" }}
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
       </List>
     </>
   );
