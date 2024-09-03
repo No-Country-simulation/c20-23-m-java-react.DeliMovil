@@ -35,7 +35,7 @@ const ListRestaurants = () => {
         }}
       >
         {restaurants.map((restaurants) => (
-          <ListItem alignItems="flex-start">
+          <ListItem key={restaurants.id} alignItems="flex-start">
             <ListItemAvatar sx={{ width: 56, height: 56 }}>
               <Avatar
                 alt="Remy Sharp"
@@ -58,7 +58,6 @@ const ListRestaurants = () => {
                   >
                     {restaurants.description}
                   </Typography>
-                  {restaurants.name}
                 </React.Fragment>
               }
             ></ListItemText>
@@ -68,14 +67,11 @@ const ListRestaurants = () => {
               }
               variant="contained"
               onClick={() => navigate(`/restaurant`)}
-              size="large"
+              size="medium"
               sx={{ backgroundColor: "#4361EE" }}
             >
               Ver mas
             </Button>
-            <Divider //variant="inset"
-              component="li"
-            />
           </ListItem>
         ))}
       </List>
