@@ -1,16 +1,15 @@
 package com.delimovil.backend.models.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Client {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -32,4 +31,10 @@ public class Client {
     private String number_street;
     @Column(length = 5)
     private String floor_department;
+    @Column(length = 45)
+    private String userName;
+    @Column(length = 20)
+    private String password;
+    @Column(length = 45)
+    private String email;
 }

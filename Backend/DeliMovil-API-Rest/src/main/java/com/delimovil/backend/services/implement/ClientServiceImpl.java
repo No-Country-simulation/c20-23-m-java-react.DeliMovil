@@ -61,7 +61,9 @@ public class ClientServiceImpl implements IClientService {
         clientBD.setName_street(clientBD.getName_street());
         clientBD.setNumber_street(clientBD.getNumber_street());
         clientBD.setFloor_department(clientBD.getFloor_department());
-
+        clientBD.setUserName(clientBD.getUserName());
+        clientBD.setPassword(clientBD.getPassword());
+        clientBD.setEmail(clientBD.getEmail());
         Client updatedClient = this.clientRepo.save(clientBD);
         return mapper.map(updatedClient, ClientDTO.class);
     }
