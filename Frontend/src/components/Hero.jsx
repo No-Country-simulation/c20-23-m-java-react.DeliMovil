@@ -213,7 +213,7 @@ export default function Hero() {
             Lo más pedido
           </Box>
           <Box sx={{ flexGrow: 1, mt: 4, ml: 3 }}>
-            <Grid container spacing={1} sx={{ marginTop: "-30px" }}>
+            <Grid container spacing={2} sx={{ marginTop: "-30px" }}>
               {cardData.map((card, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Grilla

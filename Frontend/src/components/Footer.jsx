@@ -54,17 +54,6 @@ export default function Foot() {
           }}
         >
           <Box sx={{ width: { xs: "100%", sm: "60%" } }}>
-            <Typography
-              variant="body2"
-              gutterBottom
-              sx={{ fontWeight: 600, mt: 2 }}
-            >
-              Join the newsletter
-            </Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
-              Subscribe for weekly updates. No spams ever!
-            </Typography>
-            <InputLabel htmlFor="email-newsletter">Email</InputLabel>
             <Stack direction="row" spacing={1} useFlexGap>
               <TextField
                 id="email-newsletter"
@@ -99,26 +88,7 @@ export default function Foot() {
             flexDirection: "column",
             gap: 1,
           }}
-        >
-          <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-            Product
-          </Typography>
-          <Link color="text.secondary" variant="body2" href="#">
-            Features
-          </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            Testimonials
-          </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            Highlights
-          </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            Pricing
-          </Link>
-          <Link color="text.secondary" variant="body2" href="#">
-            FAQs
-          </Link>
-        </Box>
+        ></Box>
         <Box
           sx={{
             display: { xs: "none", sm: "flex" },
@@ -180,7 +150,6 @@ export default function Foot() {
           <Link color="text.secondary" variant="body2" href="#">
             Terms of Service
           </Link>
-          <Copyright />
         </div>
         <Stack
           direction="row"
@@ -191,7 +160,7 @@ export default function Foot() {
           <IconButton
             color="inherit"
             size="small"
-            href="https://github.com/mui"
+            href="https://github.com/No-Country-simulation/c20-23-m-java-react.DeliMovil/tree/main"
             aria-label="GitHub"
             sx={{ alignSelf: "center" }}
           >
