@@ -115,6 +115,23 @@ export default function Hero() {
           sx={{ alignItems: "center", width: { xs: "100%", sm: "70%" } }}
         >
           <Typography
+            variant="h3"
+            sx={(theme) => ({
+              mb: 4,
+              color: "white",
+              fontSize: "1.8rem",
+              textAlign: "center",
+              ...theme.applyStyles("dark", {
+                color: "white",
+              }),
+              ...theme.applyStyles("light", {
+                color: "black",
+              }),
+            })}
+          >
+            Hola, ¿qué vas a pedir hoy?
+          </Typography>
+          <Typography
             variant="h1"
             sx={{
               display: "flex",

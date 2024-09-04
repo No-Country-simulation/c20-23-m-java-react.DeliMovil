@@ -14,12 +14,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  styled,
-  alpha,
-  createTheme,
-  ThemeProvider,
-} from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 // Styled components
@@ -111,7 +106,11 @@ export default function Navbar() {
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
             <Box
-              sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
+                gap: 2, // Espaciado leve entre elementos
+              }}
             >
               <Button
                 variant="text"
