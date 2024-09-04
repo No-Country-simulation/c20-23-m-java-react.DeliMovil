@@ -49,4 +49,10 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }
+
+    @GetMapping("/productsByCategory/{categoryId}")
+    public ResponseEntity<List<ProductDTO>> getProductsByCategory(@PathVariable @Min(1) Integer categoryId){
+        List<ProductDTO> list = productService.getProductsByCategoryId(categoryId);
+        return ResponseEntity.ok(list);
+    }
 }

@@ -11,4 +11,5 @@ public interface IProductService {
     ProductDTO save(ProductRequestDTO productDTO);
     ProductDTO update(ProductRequestDTO productDTO, Integer id);
     void deleteById(Integer id);
+    List<ProductDTO> getProductsByCategoryId(Integer categoryId);
 }

@@ -1,5 +1,6 @@
 package com.delimovil.backend.dto;
 
+import com.delimovil.backend.models.entity.Product_Category;
 import com.delimovil.backend.models.entity.Restaurant;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,4 +29,5 @@ public class ProductDTO {
     private Restaurant restaurant;
     @Min(1)
     private Double price;
+    private Set<Product_Category> productCategories;
 }

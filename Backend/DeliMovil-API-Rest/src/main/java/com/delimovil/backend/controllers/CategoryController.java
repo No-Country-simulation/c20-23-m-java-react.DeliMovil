@@ -55,6 +55,11 @@ public class CategoryController {
         categoryService.delete(categoryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    @GetMapping("/categoriesByProduct/{productId}")
+    public ResponseEntity<List<CategoryDto>> getCategoriesByProduct(@PathVariable @Min(1) Integer productId){
+        List<CategoryDto> list = categoryService.getCategoriesByProductId(productId);
+        return ResponseEntity.ok(list);
+    }
 
 
 }
