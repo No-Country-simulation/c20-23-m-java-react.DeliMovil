@@ -68,7 +68,12 @@ export default function Tarjeta() {
                 image={card.image}
                 alt={card.alt}
               />
-              <CardContent>
+              <CardContent
+                sx={{
+                  backgroundColor: "transparent", // Fondo transparente
+                  textAlign: "center", // Centrar texto horizontalmente
+                }}
+              >
                 <Typography gutterBottom variant="h6" component="div">
                   {card.title}
                 </Typography>

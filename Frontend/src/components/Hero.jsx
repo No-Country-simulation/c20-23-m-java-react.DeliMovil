@@ -117,6 +117,7 @@ export default function Hero() {
           <Typography
             variant="h3"
             sx={(theme) => ({
+              mt: 4,
               mb: 4,
               color: "white",
               fontSize: "1.8rem",
@@ -161,7 +162,8 @@ export default function Hero() {
               width: { sm: "100%", md: "80%" },
             }}
           >
-            Queres promocionar tu Restaurant con nosotros?
+            Queres promocionar tu Restaurant con nosotros? Queres Registrarte
+            como repartidor?
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -180,22 +182,38 @@ export default function Hero() {
             >
               Registra tu restaurant
             </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              sx={{ minWidth: "fit-content" }}
+            >
+              Registrate como repartidor
+            </Button>
           </Stack>
           <Typography
             variant="caption"
             color="text.secondary"
             sx={{ textAlign: "center" }}
-          >
-            Haciendo click en "Registra tu restaurant&quot; aceptas
-            nuestros&nbsp;
-            <Link href="#" color="primary">
-              Terminos y condiciones
-            </Link>
-          </Typography>
+          ></Typography>
         </Stack>
+
         <StyledBox id="image">
-          <Box sx={{ flexGrow: 1, mt: 4, ml: 2 }}>
-            <Grid container spacing={2}>
+          <Box
+            sx={(theme) => ({
+              position: "relative",
+              top: "-50px",
+              left: "10px",
+              color: theme.palette.mode === "dark" ? "white" : "black",
+              fontWeight: "bold",
+              fontSize: "1.4rem",
+              zIndex: 1,
+            })}
+          >
+            Lo más pedido
+          </Box>
+          <Box sx={{ flexGrow: 1, mt: 4, ml: 3 }}>
+            <Grid container spacing={1} sx={{ marginTop: "-30px" }}>
               {cardData.map((card, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Grilla
