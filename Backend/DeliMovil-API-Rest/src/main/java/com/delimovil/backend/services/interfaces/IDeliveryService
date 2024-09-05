@@ -1,0 +1,14 @@
+package com.delimovil.backend.services.interfaces;
+
+import com.delimovil.backend.dto.DeliveryDTO;
+import com.delimovil.backend.dto.DeliveryRequestDTO;
+
+import java.util.List;
+
+public interface IDeliveryService {
+    List<DeliveryDTO> findAll();
+    DeliveryDTO findById(int id);
+    DeliveryDTO save(DeliveryRequestDTO deliveryDTO);
+    DeliveryDTO update(DeliveryRequestDTO delivery, Integer id);
+    void deleteById(Integer id);
+}

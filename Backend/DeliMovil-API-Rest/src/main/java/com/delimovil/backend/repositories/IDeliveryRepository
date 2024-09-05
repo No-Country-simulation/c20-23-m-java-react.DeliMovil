@@ -1,0 +1,11 @@
+package com.delimovil.backend.repositories;
+
+import com.delimovil.backend.models.entity.Delivery;
+import org.springframework.data.jpa.repository.JpaRepository; // JpaRepository proporciona métodos como findAll(), findById(), save(), deleteById(), etc.
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface IDeliveryRepository extends JpaRepository<Delivery, Integer> {
+}
