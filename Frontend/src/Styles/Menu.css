@@ -1,9 +1,0 @@
-.navbar {
-  background: linear-gradient(135deg, #010b32, #c601a8, #bd8b00);
-  animation: gradientBG 15s ease infinite;
-}
-
-.logo-image {
-  width: 3rem;
-  height: 3rem;
-}
