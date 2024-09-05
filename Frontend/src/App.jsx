@@ -9,6 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
+import ListRestaurants from "./pages/Restaurant/ListRestaurants.jsx";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -37,6 +38,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/listrestaurant" element={<ListRestaurants/>} />
         </Routes>
         <Foot />
       </ThemeProvider>
