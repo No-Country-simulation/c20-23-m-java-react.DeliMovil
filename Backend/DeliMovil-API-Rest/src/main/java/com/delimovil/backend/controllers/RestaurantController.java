@@ -1,5 +1,6 @@
 package com.delimovil.backend.controllers;
 
+import com.delimovil.backend.dto.RestaurantCreateDTO;
 import com.delimovil.backend.dto.RestaurantDTO;
 import com.delimovil.backend.dto.ResturantRequestDTO;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
@@ -30,7 +31,7 @@ public class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody ResturantRequestDTO restaurant) {
+    public ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody RestaurantCreateDTO restaurant) {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
     }
 
