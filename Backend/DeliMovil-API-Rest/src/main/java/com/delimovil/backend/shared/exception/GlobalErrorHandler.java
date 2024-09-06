@@ -1,5 +1,6 @@
 package com.delimovil.backend.shared.exception;
 
+import com.delimovil.backend.shared.exception.personalized.ModelAlreadyExistsException;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,16 @@ public class GlobalErrorHandler {
         );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(ModelAlreadyExistsException.class)
+    public ResponseEntity<GeneralErrorResponse> handlerModelAlreadyExists(Exception ex, WebRequest request){
+        GeneralErrorResponse response = new GeneralErrorResponse(
+                LocalDateTime.now(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
