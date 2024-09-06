@@ -3,9 +3,12 @@ package com.delimovil.backend.services.implement;
 import com.delimovil.backend.dto.LocalCreateDTO;
 import com.delimovil.backend.dto.LocalDTO;
 import com.delimovil.backend.dto.LocalRequestDTO;
+import com.delimovil.backend.dto.RestaurantDTO;
 import com.delimovil.backend.models.entity.Local;
+import com.delimovil.backend.models.entity.Restaurant;
 import com.delimovil.backend.repositories.ILocalRepository;
 import com.delimovil.backend.services.interfaces.ILocalService;
+import com.delimovil.backend.services.interfaces.IRestaurantService;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ import java.util.stream.Collectors;
 public class LocalServiceImpl implements ILocalService {
     @Autowired
     private ILocalRepository localRepository;
+
+    @Autowired
+    private IRestaurantService restaurantService;
 
     @Autowired
     private ModelMapper mapper;
@@ -45,7 +51,11 @@ public class LocalServiceImpl implements ILocalService {
     @Override
     @Transactional
     public LocalDTO save(LocalCreateDTO localDTO) {
+        //validando restaurante
+        RestaurantDTO restaurantDTO = this.restaurantService.findById(localDTO.getRestaurant_id());
+
         Local local = mapper.map(localDTO, Local.class);
+        local.setRestaurant(mapper.map(restaurantDTO, Restaurant.class));
         Local saveLocal = localRepository.save(local);
 
         return mapper.map(saveLocal, LocalDTO.class);
@@ -63,6 +73,10 @@ public class LocalServiceImpl implements ILocalService {
         localBD.setPhone(localDTO.getPhone());
         localBD.setNumberStreet(localDTO.getNumberStreet());
         localBD.setFloorDepartment(localDTO.getFloorDepartment());
+
+        //validando restaurante
+        RestaurantDTO restaurantDTO = this.restaurantService.findById(localDTO.getRestaurant_id());
+        localBD.setRestaurant(mapper.map(restaurantDTO, Restaurant.class));
 
         Local updateLocal = localRepository.save(localBD);
 
