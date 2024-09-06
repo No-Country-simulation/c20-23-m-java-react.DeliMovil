@@ -65,6 +65,7 @@ public class ClientServiceImpl implements IClientService {
         clientBD.setUserName(clientDTO.getUserName());
         clientBD.setPassword(clientDTO.getPassword());
         clientBD.setEmail(clientDTO.getEmail());
+  
         Client updatedClient = this.clientRepo.save(clientBD);
         return mapper.map(updatedClient, ClientDTO.class);
     }
