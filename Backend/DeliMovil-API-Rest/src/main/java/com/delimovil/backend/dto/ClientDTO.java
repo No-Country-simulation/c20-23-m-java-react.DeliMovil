@@ -1,5 +1,7 @@
 package com.delimovil.backend.dto;
 
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientDTO {
-    @NotBlank
+    @NotNull
     @Min(1)
     private Integer id;
     @NotBlank
@@ -42,4 +44,15 @@ public class ClientDTO {
     @NotBlank
     @Size(min = 1, max = 5)
     private String floor_department;
+
+    @NotBlank
+    @Size(min = 8, max = 45)
+    private String userName;
+    @NotBlank
+    @Size(min = 8, max = 20)
+    private String password;
+    @Email
+    @NotBlank
+    @Size(min = 12, max = 45)
+    private String email;
 }

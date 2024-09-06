@@ -1,6 +1,7 @@
 package com.delimovil.backend.controllers;
 
 import com.delimovil.backend.dto.ClientDTO;
+import com.delimovil.backend.dto.ClientLoginDTO;
 import com.delimovil.backend.dto.ClientRequestDTO;
 import com.delimovil.backend.services.interfaces.IClientService;
 import jakarta.validation.Valid;
@@ -31,7 +32,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public  ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientRequestDTO client){
+    public  ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientLoginDTO client){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
     }
 

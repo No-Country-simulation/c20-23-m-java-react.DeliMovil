@@ -1,6 +1,7 @@
 package com.delimovil.backend.services.implement;
 
 import com.delimovil.backend.dto.ClientDTO;
+import com.delimovil.backend.dto.ClientLoginDTO;
 import com.delimovil.backend.dto.ClientRequestDTO;
 import com.delimovil.backend.models.entity.Client;
 import com.delimovil.backend.repositories.IClientRepository;
@@ -41,7 +42,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     @Transactional
-    public ClientDTO save(ClientRequestDTO clientDto) {
+    public ClientDTO save(ClientLoginDTO clientDto) {
         Client client = mapper.map(clientDto, Client.class);
         Client saveClient = this.clientRepo.save(client);
         return mapper.map(saveClient, ClientDTO.class);
@@ -49,19 +50,22 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     @Transactional
-    public ClientDTO update(ClientRequestDTO clientDto, Integer id) {
+    public ClientDTO update(ClientRequestDTO clientDTO, Integer id) {
         Client clientBD = this.clientRepo.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Client.class.getSimpleName())
         );
-        clientBD.setFirst_name(clientDto.getFirst_name());
-        clientBD.setLast_name(clientBD.getLast_name());
-        clientBD.setPhone(clientBD.getPhone());
-        clientBD.setLatitude(clientBD.getLatitude());
-        clientBD.setLongitude(clientBD.getLongitude());
-        clientBD.setName_street(clientBD.getName_street());
-        clientBD.setNumber_street(clientBD.getNumber_street());
-        clientBD.setFloor_department(clientBD.getFloor_department());
-
+        clientBD.setFirst_name(clientDTO.getFirst_name());
+        clientBD.setLast_name(clientDTO.getLast_name());
+        clientBD.setPhone(clientDTO.getPhone());
+        clientBD.setLatitude(clientDTO.getLatitude());
+        clientBD.setLongitude(clientDTO.getLongitude());
+        clientBD.setName_street(clientDTO.getName_street());
+        clientBD.setNumber_street(clientDTO.getNumber_street());
+        clientBD.setFloor_department(clientDTO.getFloor_department());
+        clientBD.setUserName(clientDTO.getUserName());
+        clientBD.setPassword(clientDTO.getPassword());
+        clientBD.setEmail(clientDTO.getEmail());
+  
         Client updatedClient = this.clientRepo.save(clientBD);
         return mapper.map(updatedClient, ClientDTO.class);
     }
