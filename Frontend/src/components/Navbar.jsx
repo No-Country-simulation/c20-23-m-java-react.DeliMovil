@@ -138,7 +138,7 @@ export default function Navbar() {
                 />
               </Search>
               <Button variant="text" color="info" size="small">
-                Categorias
+                <Link to={"/listrestaurants"}>Categorias</Link>
               </Button>
               <Button
                 variant="text"
@@ -146,7 +146,15 @@ export default function Navbar() {
                 size="small"
                 sx={{ minWidth: 0 }}
               >
-                FAQ
+                <Link to={"/checkout"}>Checkout</Link>
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                sx={{ minWidth: 0 }}
+              >
+                <Link to={"/cart"}>Cart</Link>
               </Button>
             </Box>
           </Box>
@@ -169,10 +177,10 @@ export default function Navbar() {
             ) : (
               <>
                 <Button color="primary" variant="text" size="small">
-                  Sign in
+                  <Link to={"/login"}>Sign in</Link>
                 </Button>
                 <Button color="primary" variant="contained" size="small">
-                  Sign up
+                  <Link to={"/register"}>Sign up</Link>
                 </Button>
               </>
             )}

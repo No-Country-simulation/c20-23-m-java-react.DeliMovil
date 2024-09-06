@@ -9,14 +9,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import IconButton from "@mui/material/IconButton";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
-
 import ListRestaurants from "./pages/Restaurant/ListRestaurants.jsx";
-
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
-
-
-
+import Checkout from "./components/Cart-Checkout/Checkout";
+import Cart from "./components/Cart-Checkout/Cart.jsx";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -45,11 +42,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-
-          <Route path="/listrestaurants" element={<ListRestaurants/>} />
+          <Route path="/listrestaurants" element={<ListRestaurants />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Foot />
       </ThemeProvider>
