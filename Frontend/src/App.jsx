@@ -12,6 +12,10 @@ import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
 
 import ListRestaurants from "./pages/Restaurant/ListRestaurants.jsx";
 
+import { Register } from "./pages/Register";
+import { Login } from "./pages/Login";
+
+
 
 
 function App() {
@@ -42,7 +46,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="/listrestaurant" element={<ListRestaurants/>} />
+          <Route path="/listrestaurants" element={<ListRestaurants/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
         </Routes>
         <Foot />
