@@ -17,11 +17,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {
-    @NotBlank
+    @NotNull
     @Min(1)
     private Integer id;
 
-    @NotBlank
+    @NotNull
     private Double total;
 
     private DeliveryDTO delivery;
@@ -33,4 +33,5 @@ public class OrderDTO {
     private Date date;
     @NotBlank
     private String state;
+    private List<OrderDetailDTO> orderDetails;
 }

@@ -47,6 +47,9 @@ public class OrderServiceImpl implements IOrderService {
     @Transactional
     public OrderDTO save(OrderRequestDTO orderDTO) {
         Order order = mapper.map(orderDTO,Order.class);
+        order.setOrderDetails(orderDTO.getOrderDetails().stream()
+                .map(detailDTO -> mapper.map(detailDTO, OrderDetail.class))
+                .collect(Collectors.toList()));
         Order saveOrder = this.orderRepo.save(order);
         return mapper.map(saveOrder, OrderDTO.class);
     }
@@ -61,6 +64,9 @@ public class OrderServiceImpl implements IOrderService {
         * Más adelante vemos si necesitamos que se puedan modificar más cosas, como por ej. el delivery(pensando en el caso de que el delivery quisiera cancelar el envío ya aceptado */
         orderBD.setState(orderDTO.getState());
         orderBD.setTotal((orderDTO.getTotal()));
+        orderBD.setOrderDetails(orderDTO.getOrderDetails().stream()
+                .map(detailDTO -> mapper.map(detailDTO, OrderDetail.class))
+                .collect(Collectors.toList()));
         Order updatedOrder = this.orderRepo.save(orderBD);
         return mapper.map(updatedOrder, OrderDTO.class);
     }

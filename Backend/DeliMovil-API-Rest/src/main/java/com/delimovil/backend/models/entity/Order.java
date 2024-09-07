@@ -10,6 +10,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Order {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -31,5 +33,7 @@ public class Order {
     private Date date;
     @Column(length = 45)
     private String state;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetail> orderDetails;
 }
 

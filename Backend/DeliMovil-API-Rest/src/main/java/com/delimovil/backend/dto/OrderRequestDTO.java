@@ -32,4 +32,5 @@ public class OrderRequestDTO {
     @NotBlank
     @Size(min=2, max = 45)
     private String state;
+    private List<OrderDetailRequestDTO> orderDetails;
 }
