@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductController {
     @Autowired
     private IProductService productService;
@@ -42,11 +42,27 @@ public class ProductController {
         return ResponseEntity.ok(productService.update(product, id));
     }
 
+    //Para asignar una categoria a producto
+    @PatchMapping("/{id-product}/category/{id-category}")
+    public ResponseEntity<Void> assignCategory(
+            @PathVariable(name = "id-product") Integer idProduct,
+            @PathVariable(name = "id-category") Integer idCategory
+    ) {
+        this.productService.assignCategory(idProduct, idCategory);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteRestaurant(@PathVariable @Min(1) Integer id){
         this.productService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<ProductDTO>> getProductsByCategory(@PathVariable @Min(1) Integer categoryId){
+        List<ProductDTO> list = productService.getProductsByCategoryId(categoryId);
+        return ResponseEntity.ok(list);
     }
 }

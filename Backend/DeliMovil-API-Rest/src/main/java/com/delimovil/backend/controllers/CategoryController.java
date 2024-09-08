@@ -32,8 +32,8 @@ public class CategoryController {
         CategoryDto category = categoryService.getByName(name);
         return ResponseEntity.ok(category);
     }
-    @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> getById(@PathVariable @Min(1) Integer categoryId){
+    @GetMapping("/{category-id}")
+    public ResponseEntity<CategoryDto> getById(@PathVariable(name = "category-id") @Min(1) Integer categoryId){
         CategoryDto category = categoryService.getById(categoryId);
         return ResponseEntity.ok(category);
     }
@@ -44,16 +44,26 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
 
     }
-    @PatchMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> update(@Valid @RequestBody CategoryRequestDto request, @PathVariable @Min(1) Integer categoryId){
+    @PatchMapping("/{category-id}")
+    public ResponseEntity<CategoryDto> update(
+            @Valid @RequestBody CategoryRequestDto request,
+            @PathVariable(name = "category-id") @Min(1) Integer categoryId
+    ){
         CategoryDto category = categoryService.update(request, categoryId);
         return ResponseEntity.ok(category);
     }
 
-    @DeleteMapping("/{categoryId}")
-    public ResponseEntity<Void> delete(@PathVariable @Min(1) Integer categoryId){
+    @DeleteMapping("/{category-id}")
+    public ResponseEntity<Void> delete(@PathVariable(name = "category-id") @Min(1) Integer categoryId){
         categoryService.delete(categoryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    @GetMapping("/product/{product-id}")
+    public ResponseEntity<List<CategoryDto>> getCategoriesByProduct(
+            @PathVariable(name = "product-id") @Min(1) Integer productId
+    ){
+        List<CategoryDto> list = categoryService.getCategoriesByProductId(productId);
+        return ResponseEntity.ok(list);
     }
 
 

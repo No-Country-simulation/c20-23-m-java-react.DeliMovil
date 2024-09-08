@@ -14,4 +14,5 @@ public interface ICategoryService {
     CategoryDto update(CategoryRequestDto request, Integer categoryId);
 
     void delete(Integer categoryId);
+    List<CategoryDto> getCategoriesByProductId(Integer productId);
 }

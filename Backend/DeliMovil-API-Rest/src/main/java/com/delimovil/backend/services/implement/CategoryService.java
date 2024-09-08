@@ -4,6 +4,7 @@ import com.delimovil.backend.dto.CategoryDto;
 import com.delimovil.backend.dto.CategoryRequestDto;
 import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.repositories.ICategoryRepository;
+import com.delimovil.backend.repositories.IProductCategoryRepository;
 import com.delimovil.backend.services.interfaces.ICategoryService;
 
 import com.delimovil.backend.shared.exception.personalized.ModelAlreadyExistsException;
@@ -25,6 +26,8 @@ public class CategoryService implements ICategoryService {
 
     @Autowired
     private ICategoryRepository categoryRepository;
+    @Autowired
+    private IProductCategoryRepository product_categoryRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -84,5 +87,16 @@ public class CategoryService implements ICategoryService {
         );
         categoryRepository.delete(category);
 
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public List<CategoryDto> getCategoriesByProductId(Integer productId) {
+        List<Category> categories = product_categoryRepository.findCategoriesByProductId(productId);
+        if (categories.isEmpty()){
+            throw new ModelNotFoundException(productId, "Categories with that product");
+        }
+        return categories.stream()
+                .map(category -> modelMapper.map(category, CategoryDto.class))
+                .collect(Collectors.toList());
     }
 }
