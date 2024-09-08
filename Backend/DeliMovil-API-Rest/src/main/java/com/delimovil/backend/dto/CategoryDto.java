@@ -1,7 +1,6 @@
 package com.delimovil.backend.dto;
 
-import com.delimovil.backend.models.entity.Product_Category;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.delimovil.backend.models.entity.ProductCategory;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +19,5 @@ public class CategoryDto {
     @NotBlank
     private String description;
 
-    private Set<Product_Category> productCategories;
+    private Set<ProductCategory> productCategories;
 }

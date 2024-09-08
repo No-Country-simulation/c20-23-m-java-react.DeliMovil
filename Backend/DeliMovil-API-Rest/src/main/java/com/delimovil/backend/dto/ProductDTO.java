@@ -1,6 +1,6 @@
 package com.delimovil.backend.dto;
 
-import com.delimovil.backend.models.entity.Product_Category;
+import com.delimovil.backend.models.entity.ProductCategory;
 import com.delimovil.backend.models.entity.Restaurant;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -29,5 +29,5 @@ public class ProductDTO {
     private Restaurant restaurant;
     @Min(1)
     private Double price;
-    private Set<Product_Category> productCategories;
+    private Set<ProductCategory> productCategories;
 }

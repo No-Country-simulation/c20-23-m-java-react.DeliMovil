@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product_Category {
+public class ProductCategory {
     @EmbeddedId
     private Product_CategoryPK id;
 

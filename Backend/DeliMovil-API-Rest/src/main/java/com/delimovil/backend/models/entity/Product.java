@@ -28,5 +28,5 @@ public class Product {
     private Double price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product_Category> productCategories = new HashSet<>();
+    private Set<ProductCategory> productCategories = new HashSet<>();
 }
