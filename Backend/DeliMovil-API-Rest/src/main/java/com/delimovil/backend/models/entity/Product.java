@@ -27,6 +27,6 @@ public class Product {
     private Restaurant restaurant;
     private Double price;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductCategory> productCategories = new HashSet<>();
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<ProductCategory> productCategories = new HashSet<>();
 }

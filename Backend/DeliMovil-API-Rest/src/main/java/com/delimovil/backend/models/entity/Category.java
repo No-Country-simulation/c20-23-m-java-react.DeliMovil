@@ -21,7 +21,7 @@ public class Category {
     private String name;
     @Column(length = 100)
     private String description;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductCategory> productCategories = new HashSet<>();
+//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<ProductCategory> productCategories = new HashSet<>();
 
 }
