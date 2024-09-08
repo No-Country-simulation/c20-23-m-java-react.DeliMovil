@@ -57,6 +57,7 @@ public class ProductServiceImpl implements IProductService {
 
         Product product = mapper.map(productDTO, Product.class);
         product.setRestaurant( mapper.map(restaurantDTO, Restaurant.class) );
+        product.setId(null);
         Product saveProduct = this.productRepository.save(product);
 
         return mapper.map(saveProduct, ProductDTO.class);
