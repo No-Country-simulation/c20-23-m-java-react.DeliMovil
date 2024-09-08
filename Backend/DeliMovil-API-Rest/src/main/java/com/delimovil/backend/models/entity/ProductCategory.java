@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductCategory {
     @EmbeddedId
-    private Product_CategoryPK id;
+    private ProductCategoryPK id;
 
     @ManyToOne
     @MapsId("categoryId")
