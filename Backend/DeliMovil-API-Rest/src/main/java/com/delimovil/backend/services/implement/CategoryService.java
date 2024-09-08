@@ -91,10 +91,12 @@ public class CategoryService implements ICategoryService {
     @Override
     @Transactional(readOnly = true)
     public List<CategoryDto> getCategoriesByProductId(Integer productId) {
-        List<Category> list = product_categoryRepository.findCategoriesByProductId(productId);
-        if (list.isEmpty()){
+        List<Category> categories = product_categoryRepository.findCategoriesByProductId(productId);
+        if (categories.isEmpty()){
             throw new ModelNotFoundException(productId, "Categories with that product");
         }
-        return list.stream().map(category -> modelMapper.map(category, CategoryDto.class)).collect(Collectors.toList());
+        return categories.stream()
+                .map(category -> modelMapper.map(category, CategoryDto.class))
+                .collect(Collectors.toList());
     }
 }
