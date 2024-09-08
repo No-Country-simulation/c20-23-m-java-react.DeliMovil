@@ -1,17 +1,24 @@
 package com.delimovil.backend.models.entity;
 
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Embeddable
-@Data
-@AllArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductCategoryPK implements Serializable {
-    private Integer categoryId;
-    private Integer productId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 }

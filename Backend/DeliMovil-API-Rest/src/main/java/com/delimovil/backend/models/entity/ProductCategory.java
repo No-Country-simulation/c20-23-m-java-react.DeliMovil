@@ -1,26 +1,18 @@
 package com.delimovil.backend.models.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Entity
-@Table(name = "product_category")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "product_category")
+@IdClass(ProductCategoryPK.class)
 public class ProductCategory {
-    @EmbeddedId
-    private ProductCategoryPK id;
-
-    @ManyToOne
-    @MapsId("categoryId")
-    @JoinColumn(name = "category_id")
+    @Id
     private Category category;
-
-    @ManyToOne
-    @MapsId("productId")
-    @JoinColumn(name = "product_id")
+    @Id
     private Product product;
 }
