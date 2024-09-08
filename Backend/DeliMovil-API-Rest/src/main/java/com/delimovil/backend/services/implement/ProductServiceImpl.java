@@ -3,10 +3,10 @@ package com.delimovil.backend.services.implement;
 import com.delimovil.backend.dto.ProductDTO;
 import com.delimovil.backend.dto.ProductRequestDTO;
 import com.delimovil.backend.dto.RestaurantDTO;
-import com.delimovil.backend.models.entity.Product;
-import com.delimovil.backend.models.entity.Restaurant;
+import com.delimovil.backend.models.entity.*;
 import com.delimovil.backend.repositories.IProductRepository;
 import com.delimovil.backend.repositories.IProductCategoryRepository;
+import com.delimovil.backend.services.interfaces.ICategoryService;
 import com.delimovil.backend.services.interfaces.IProductService;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
@@ -26,8 +26,13 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IRestaurantService restaurantService;
+
     @Autowired
     private IProductCategoryRepository product_categoryRepository;
+
+    @Autowired
+    private ICategoryService categoryService;
+
     @Autowired
     private ModelMapper mapper;
     
@@ -80,6 +85,15 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     @Transactional
+    public void assignCategory(Integer productId, Integer categoryId) {
+        Product product = mapper.map(this.findById(productId), Product.class);
+        Category category = mapper.map(this.categoryService.getById(categoryId), Category.class);
+
+        this.product_categoryRepository.save(new ProductCategory(category, product));
+    }
+
+    @Override
+    @Transactional
     public void deleteById(Integer id) {
         Optional<Product> product = this.productRepository.findById(id);
         if (product.isEmpty()){
@@ -92,11 +106,11 @@ public class ProductServiceImpl implements IProductService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductDTO> getProductsByCategoryId(Integer categoryId) {
-        List<Product> list = product_categoryRepository.findProductsByCategoryId(categoryId);
-        if (list.isEmpty()){
+        List<Product> products = product_categoryRepository.findProductsByCategoryId(categoryId);
+        if (products.isEmpty()){
             throw new ModelNotFoundException(categoryId, "Products by that category");
         }
-        return list.stream().map(product -> mapper.map(product, ProductDTO.class)).toList();
+        return products.stream().map(product -> mapper.map(product, ProductDTO.class)).toList();
 
     }
 
