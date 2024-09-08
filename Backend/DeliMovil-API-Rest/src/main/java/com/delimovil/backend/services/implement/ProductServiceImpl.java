@@ -6,7 +6,7 @@ import com.delimovil.backend.dto.RestaurantDTO;
 import com.delimovil.backend.models.entity.Product;
 import com.delimovil.backend.models.entity.Restaurant;
 import com.delimovil.backend.repositories.IProductRepository;
-import com.delimovil.backend.repositories.IProduct_CategoryRepository;
+import com.delimovil.backend.repositories.IProductCategoryRepository;
 import com.delimovil.backend.services.interfaces.IProductService;
 import com.delimovil.backend.services.interfaces.IRestaurantService;
 import com.delimovil.backend.shared.exception.personalized.ModelNotFoundException;
@@ -27,7 +27,7 @@ public class ProductServiceImpl implements IProductService {
     @Autowired
     private IRestaurantService restaurantService;
     @Autowired
-    private IProduct_CategoryRepository product_categoryRepository;
+    private IProductCategoryRepository product_categoryRepository;
     @Autowired
     private ModelMapper mapper;
     

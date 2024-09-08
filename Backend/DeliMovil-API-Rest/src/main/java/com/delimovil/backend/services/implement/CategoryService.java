@@ -4,7 +4,7 @@ import com.delimovil.backend.dto.CategoryDto;
 import com.delimovil.backend.dto.CategoryRequestDto;
 import com.delimovil.backend.models.entity.Category;
 import com.delimovil.backend.repositories.ICategoryRepository;
-import com.delimovil.backend.repositories.IProduct_CategoryRepository;
+import com.delimovil.backend.repositories.IProductCategoryRepository;
 import com.delimovil.backend.services.interfaces.ICategoryService;
 
 import com.delimovil.backend.shared.exception.personalized.ModelAlreadyExistsException;
@@ -27,7 +27,7 @@ public class CategoryService implements ICategoryService {
     @Autowired
     private ICategoryRepository categoryRepository;
     @Autowired
-    private IProduct_CategoryRepository product_categoryRepository;
+    private IProductCategoryRepository product_categoryRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override

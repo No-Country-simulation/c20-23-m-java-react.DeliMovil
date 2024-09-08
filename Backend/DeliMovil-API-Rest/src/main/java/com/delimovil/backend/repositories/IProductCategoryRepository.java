@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IProduct_CategoryRepository extends JpaRepository<ProductCategory, ProductCategoryPK> {
+public interface IProductCategoryRepository extends JpaRepository<ProductCategory, ProductCategoryPK> {
     @Query("SELECT pc.product FROM ProductCategory pc WHERE pc.category.id = :categoryId")
     List<Product> findProductsByCategoryId(@Param("categoryId") Integer categoryId);
 
