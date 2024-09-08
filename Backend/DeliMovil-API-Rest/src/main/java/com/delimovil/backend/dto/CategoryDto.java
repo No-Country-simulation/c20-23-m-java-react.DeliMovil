@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,5 +20,5 @@ public class CategoryDto {
     @NotBlank
     private String description;
 
-    private Set<ProductCategory> productCategories;
+//    private Set<ProductCategory> productCategories;
 }
