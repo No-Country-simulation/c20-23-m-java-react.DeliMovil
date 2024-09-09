@@ -15,20 +15,26 @@ function Checkout() {
     <Container>
 
     <div className='header-checkout'>
-      <p>Hasta 6 cuotas sin interés </p>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">Hasta 6 cuotas sin interés</Typography>
     </div>
 
     <div className='email'>
-       <h1>1-EMAIL</h1>
-       <input type="text" />
+    <Typography variant="h1" component="h2">
+       1-EMAIL
+     </Typography>
+
+      <input type="text" />
 
     <section className='section'>
-      <h2>Guardamos su correo electrónico de manera 100% segura para:</h2>
+      <Typography variant="h2" component="h2">
+        Guardamos su correo electrónico de manera 100% segura para:
+      </Typography>
+ 
+      
       <Typography id="outlined-basic" label="Outlined" variant="outlined">✔️Identificar su perfil</Typography>
-      <p>✔️Identificar su perfil</p>
-      <p>✔️Notificar sobre los estados de su compra</p>
-      <p>✔️Guardar el historial de compras</p>
-      <p>✔️Facilitar el proceso de compra</p>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">✔️Notificar sobre los estados de su compra</Typography>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">✔️Guardar el historial de compras</Typography>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">✔️Facilitar el proceso de compra</Typography>
     </section>
 
     <button>Continuar</button>
@@ -72,11 +78,12 @@ function Checkout() {
     >Enviar</Button>
 
     <div className='resumen-compra'>
-      <p>RESUMEN DE LA COMPRA</p>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">Resumen de la compra</Typography>
       <title>Combo de Hamburguesa con Papas Fritas</title>
-      <p>Ingresa tu código de descuento <Link>click aquí</Link></p>
-      <p>Subtotal</p>
-      <p>Total</p>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">Ingresa tu código de descuento<Link>click aquí</Link></Typography>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">Subtotal</Typography>
+      <Typography id="outlined-basic" label="Outlined" variant="outlined">Total</Typography>
+      
     </div>
     <Link>Volver al carrito</Link>
   </Container>
