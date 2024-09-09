@@ -108,6 +108,9 @@ export default function Foot() {
           <Link color="text.secondary" variant="body2" href="#">
             Press
           </Link>
+          <Link color="text.secondary" variant="body2" href="/frecuentquestions">
+          Preguntas Frecuentes
+          </Link>
         </Box>
         <Box
           sx={{

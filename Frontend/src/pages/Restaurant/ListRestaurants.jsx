@@ -9,7 +9,6 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import THEME from "../../constants/Theme";
 import {
   Box,
   Button,
@@ -114,7 +113,6 @@ const ListRestaurants = () => {
     <>
       <Container
         sx={{
-          backgroundColor: THEME.palette.secondary.main,
           marginBottom: "1%",
         }}
       >
@@ -122,7 +120,7 @@ const ListRestaurants = () => {
           sx={{
             display: "flex",
             alignItems: "flex-end",
-            backgroundColor: "#4361EE",
+           // backgroundColor: "#4361EE",
             borderRadius: 1,
             //margin: 1,
             width: "100%",
@@ -136,9 +134,7 @@ const ListRestaurants = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <SearchIcon
-                    sx={{ color: THEME.palette.primary.contrastText }}
-                  />
+                  <SearchIcon/>
                 </InputAdornment>
               ),
             }}
@@ -159,8 +155,6 @@ const ListRestaurants = () => {
               //  width: "100%",
               // maxWidth: "95%",
               margin: "1%",
-              backgroundColor: THEME.palette.primary_white.contrastText,
-              color: THEME.palette.secondary.main,
             }}
           >
             {restaurants.map((e) => (
@@ -177,7 +171,6 @@ const ListRestaurants = () => {
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  sx={{ color: THEME.palette.primary.main }}
                   primary={e.name}
                   onClick={() => navigate(`/restaurant`)}
                   secondary={
@@ -186,7 +179,6 @@ const ListRestaurants = () => {
                         component="span"
                         variant="body2"
                         sx={{
-                          color: THEME.palette.primary.main,
                           display: "inline",
                         }}
                       >
