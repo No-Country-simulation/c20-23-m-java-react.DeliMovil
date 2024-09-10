@@ -1,17 +1,23 @@
-import { Container, Typography, Button, List, ListItem, ListItemText, Box, TextField } from '@mui/material';
+import { Container, Typography, Button, List, ListItem, Box, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { Link as MuiLink } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber'; 
+import SendIcon from '@mui/icons-material/Send';
+import { useTheme } from '@mui/material/styles';
+
 
 
 function Checkout() {
   const [showDatosPersonales, setShowDatosPersonales] = useState(false);
   const [showEntrega, setShowEntrega] = useState(false);
   const [showPago, setShowPago] = useState(false);
+  const [showCouponInput, setShowCouponInput] = useState(false)
 
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
 
   return (
     <>
@@ -34,51 +40,75 @@ function Checkout() {
      fullWidth sx={{marginBttom:'20px', fontSize:'18px'}} />
     
 
-    <Box className='section'>
-      <Typography variant="h5" component="h2">
+    <Box 
+     className='section' 
+     sx={{
+       backgroundColor: isDarkMode ? '#424242' : '#f5f5f5',
+       padding:3, 
+       borderRadius:2, 
+       maxWidth:600, 
+       margin:'0 auto' }}>
+      <Typography variant="h5" component="h2" 
+      sx={{
+        marginBottom:2,
+        color: isDarkMode ? '#fff' : '#000',}}>
         Guardamos su correo electrónico de manera 100% segura para:
       </Typography>
  
     <List>
-      <ListItem>
-        <CheckCircleIcon sx={{marginRight: 0.5}} />
-        <ListItemText primary=
-        {<Typography variant='body1' sx={{marginRight:50}}>Identificar su perfil</Typography>}/>
+      <ListItem sx={{ display:'flex', alignItems:'center'}}>
+        <CheckCircleIcon 
+        sx={{
+          marginRight: 1,
+          color: isDarkMode ? '#76ff03' : '#4caf50'}} />
+        <Typography variant='body1'
+        sx={{color: isDarkMode ? '#fff' : '#000'}}>Identificar su perfil</Typography>
       </ListItem>
 
-      <ListItem>
-        <CheckCircleIcon sx={{marginRight: 1}} />
-        <ListItemText primary={<Typography variant='body1' sx={{marginRight:30}}>Notificar sobre los estados de su compra</Typography>}/>
+      <ListItem sx={{display:'flex', alignItems:'center'}}>
+        <CheckCircleIcon 
+        sx={{
+          marginRight: 1,
+          color: isDarkMode ? '#76ff03' : '#4caf50',}} />
+        <Typography variant='body1'
+         sx={{color: isDarkMode ? '#fff' : '#000'}}>Notificar sobre los estados de su compra</Typography>
       </ListItem>
 
-      <ListItem>
-        <CheckCircleIcon sx={{marginRight: 1}} />
-        <ListItemText primary={<Typography variant='body1' sx={{marginRight:39}}>Guardar el historial de compras</Typography>}/>
+      <ListItem sx={{display:'flex', alignItems:'center'}}>
+        <CheckCircleIcon 
+        sx={{
+          marginRight: 1,
+          color: isDarkMode ? '#76ff03' : '#4caf50',}} />
+        <Typography variant='body1'
+         sx={{color: isDarkMode ? '#fff' : '#000'}}
+        >Guardar el historial de compras</Typography>
       </ListItem>
 
-      <ListItem>
-        <CheckCircleIcon sx={{marginRight: 1}} />
-        <ListItemText primary={<Typography variant='body1'sx={{marginRight:40.5}}>Facilitar el proceso de compra</Typography>}/>
+      <ListItem sx={{display:'flex', alignItems:'center'}}>
+        <CheckCircleIcon sx={{marginRight: 1,color: isDarkMode ? '#76ff03' : '#4caf50',}} />
+        <Typography variant='body1'
+         sx={{color: isDarkMode ? '#fff' : '#000'}}>Facilitar el proceso de compra</Typography>
       </ListItem>
     </List> 
-    </Box>
-   
-   <Box sx={{display:'flex', justifyContent:'center', marginTop:'20px'}}>
-     <Button variant="contained" 
+  
+    <Button 
+       variant="contained" 
      sx={{
-      color:'white',
-      backgroundColor:'#8968CD',
-      fontSize:'0.87rem',
-      padding:'6px 12px',
-      margin:'0 auto',
+      marginTop:3,
+      borderRadius:'20px',
+      fontSize:'0.8rem',
+      padding:'6px 10px',
+      minWidth:'50px',
       display:'block',
-      textAlign:'center',
+      marginLeft:'auto',
+      marginRight:'auto',
+      backgroundColor:'#0cb7f2',
       '&:hover':{
-        backgroundColor:'#6F4685'
+        backgroundColor:'#7cdaf9'
       }
       }}
     >Continuar</Button>
-   </Box>
+    </Box>
  
     </Box>
 
@@ -130,27 +160,38 @@ function Checkout() {
       </Box>
     )}
 
-    <Button variant="contained" 
-     sx={{marginTop:'20px', marginBottom:'40px'}}
+    <Button variant="contained" endIcon={<SendIcon /> }
+     sx={{
+      marginTop:'20px',
+      marginBottom:'40px',
+      backgroundColor:'#0cb7f2',
+      '&:hover':{
+        backgroundColor:'#7cdaf9'
+      }
+    }}
     >Enviar</Button>
 
     <Box className='resumen-compra' 
     sx={{
       marginBottom:'20px',
       padding:'20px',
-      backgroundColor:'#f5f5f5',
+      backgroundColor: isDarkMode ? '#424242' : '#f5f5f5',
       borderRadius:'8px',
-      boxShadow:'0 2px 4px rgba(0, 0, 0, 0.1',
+      boxShadow:'0 2px 4px rgba(0, 0, 0, 0.1)',
       textAlign:'center',
+      maxWidth:'600px',
+      margin:'0 auto'
       }}>
-      <Typography variant="h6" sx={{
-        color:'black',
-        textAlign:'center',
+      <Typography variant="h6" 
+      sx={{
+        color:isDarkMode ? '#fff' : '#000',
         fontWeight:'bold',
         fontSize:'1.5rem',
-        margin:'10px'}}>Resumen de la compra</Typography>
+        marginBottom:'10px'}}>Resumen de la compra</Typography>
 
-      <Typography variant='body1'>Combo de Hamburguesa con Papas Fritas</Typography>
+      <Typography variant='body1'
+      sx={{
+        color: isDarkMode ? '#fff' : '#000',}}>Combo de Hamburguesa con Papas Fritas</Typography>
 
     <Box sx={{ 
       display:'flex',             
@@ -159,20 +200,59 @@ function Checkout() {
       marginTop:'10px',
       marginBottom:'10px',
        }}>
-    <ConfirmationNumberIcon sx={{ marginRight:0.5, backgroundColor:'black'}} />
+    <ConfirmationNumberIcon 
+     sx={{ marginRight:0.5,
+      color:isDarkMode ? '#fff' : '#000' 
+      }} />
 
-    <Typography variant="body1" sx={{marginRight:'30%'}}>Ingresa tu código de   descuento <MuiLink href="#" sx={{ marginRight: '20px', color: 'inherit', color:'black' }}>click aquí</MuiLink></Typography>
+    <Typography variant="body1" 
+     sx={{
+      color: isDarkMode ? '#fff' : '#000'
+     }}>Ingresa tu código de   descuento 
+     <MuiLink 
+      component='button'
+      onClick={() => setShowCouponInput(!showCouponInput)}
+      sx={{ color: isDarkMode ? '#76ff03' : '#000', marginLeft:'5px', cursor:'pointer' }}>{showCouponInput ? 'ocultar' : 'click aquí'}</MuiLink></Typography>
     </Box> 
+
+    {showCouponInput && (
+      <Box sx={{
+        marginTop:'10px',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
+      }}>
+        <TextField 
+        variant='outlined'
+        label="Código de cupón"
+        sx={{ marginRight:'10px'}}
+        />
+        <Button
+         variant='contained'
+         endIcon={<SendIcon />}
+         sx={{ backgroundColor: '#0cb7f2', '&:hover' : { backgroundColor: '#7cdaf9'}}}>Aplicar</Button>
+      </Box>
+    )}
       
-      <Typography variant="body1" sx={{marginTop: '10px'}}>Subtotal</Typography>
-      <Typography variant="body1" sx={{ marginTop:'10px'}}>Total</Typography>
+      <Typography variant="body1" 
+      sx={{marginTop: '10px',
+          color: isDarkMode ? '#fff' : '#000'
+      }}>Subtotal</Typography>
+      <Typography variant="body1" sx={{ marginTop:'10px',
+        color: isDarkMode ? '#fff' : '#000'
+      }}>Total</Typography>
     
 
-    <MuiLink href="/cart" sx={{ textAlign:'center',marginRight: '10px', color: 'inherit' }}>Volver al carrito</MuiLink>
+    <MuiLink href="/cart"
+     sx={{ 
+      textAlign:'center',
+      marginRight: '10px',
+      color: isDarkMode ? '#76ff03' : '#000' }}>Volver al carrito</MuiLink>
   </Box>
   </Container>
   </>
   )
+
 }
 
 export default Checkout;
