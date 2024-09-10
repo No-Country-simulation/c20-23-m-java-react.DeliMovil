@@ -22,4 +22,6 @@ public class RestaurantDTO {
     @NotBlank
     @Size(min = 3, max = 100)
     private String description;
+    @Size(min = 3, max = 250)
+    private String imageUrl;
 }

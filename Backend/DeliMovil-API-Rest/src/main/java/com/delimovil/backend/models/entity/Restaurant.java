@@ -20,4 +20,6 @@ public class Restaurant {
     private String name;
     @Column(length = 100)
     private String description;
+    @Column(length = 250)
+    private String imageUrl;
 }
