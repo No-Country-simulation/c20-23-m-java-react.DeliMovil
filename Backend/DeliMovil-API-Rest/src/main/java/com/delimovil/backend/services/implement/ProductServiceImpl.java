@@ -1,5 +1,6 @@
 package com.delimovil.backend.services.implement;
 
+import com.delimovil.backend.dto.CategoryDto;
 import com.delimovil.backend.dto.ProductDTO;
 import com.delimovil.backend.dto.ProductRequestDTO;
 import com.delimovil.backend.dto.RestaurantDTO;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,10 +41,12 @@ public class ProductServiceImpl implements IProductService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductDTO> findAll() {
-        return this.productRepository.findAll()
+        List<ProductDTO> productDTOList = this.productRepository.findAll()
                 .stream()
                 .map(res -> mapper.map(res, ProductDTO.class))
                 .collect(Collectors.toList());
+
+        return productDTOList;
     }
 
     @Override
@@ -52,7 +56,10 @@ public class ProductServiceImpl implements IProductService {
                 () -> new ModelNotFoundException(id, Product.class.getSimpleName())
         );
 
-        return mapper.map(product, ProductDTO.class);
+        ProductDTO productDTO =  mapper.map(product, ProductDTO.class);
+        this.findCategories(productDTO);
+
+        return productDTO;
     }
 
     @Override
@@ -112,6 +119,18 @@ public class ProductServiceImpl implements IProductService {
         }
         return products.stream().map(product -> mapper.map(product, ProductDTO.class)).toList();
 
+    }
+
+    private ProductDTO findCategories(ProductDTO productDTO) {
+        List<CategoryDto> categories;
+        try{
+            categories = this.categoryService.getCategoriesByProductId(productDTO.getId());
+        }catch (ModelNotFoundException ex){
+            categories = null;
+        }
+
+        productDTO.setCategories(categories);
+        return productDTO;
     }
 
 }
