@@ -19,23 +19,23 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> findAllRestaurants() {
+    public ResponseEntity<List<ProductDTO>> findAllProducts() {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> findRestaurantById(@PathVariable @Min(1) Integer id) {
+    public ResponseEntity<ProductDTO> findProductById(@PathVariable @Min(1) Integer id) {
         return ResponseEntity.ok(productService.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProductDTO> createRestaurant(@Valid @RequestBody ProductRequestDTO product) {
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductRequestDTO product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateRestaurant(
+    public ResponseEntity<ProductDTO> updateProduct(
             @RequestBody ProductRequestDTO product,
             @PathVariable @Min(1) Integer id
     ) {
@@ -54,7 +54,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteRestaurant(@PathVariable @Min(1) Integer id){
+    public ResponseEntity<Void> deleteProduct(@PathVariable @Min(1) Integer id){
         this.productService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
