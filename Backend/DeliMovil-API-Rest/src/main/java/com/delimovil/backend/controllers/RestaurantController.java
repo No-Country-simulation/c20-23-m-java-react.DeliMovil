@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,16 +32,19 @@ public class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody RestaurantCreateDTO restaurant) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurant));
+    public ResponseEntity<RestaurantDTO> createRestaurant(
+            @RequestPart("restaurant") RestaurantCreateDTO restaurantDTO,
+            @RequestPart("image") MultipartFile image)  {
+        return ResponseEntity.status(HttpStatus.CREATED).body(restaurantService.save(restaurantDTO, image));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<RestaurantDTO> updateRestaurant(
-            @RequestBody ResturantRequestDTO restaurant,
+            @RequestPart(value = "restaurant") ResturantRequestDTO restaurant,
+            @RequestPart(value = "image", required = false) MultipartFile image,
             @PathVariable @Min(1) Integer id
     ) {
-        return ResponseEntity.ok(restaurantService.update(restaurant, id));
+        return ResponseEntity.ok(restaurantService.update(restaurant, image, id));
     }
 
     @DeleteMapping("/{id}")
