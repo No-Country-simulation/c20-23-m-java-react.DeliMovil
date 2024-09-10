@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetailDTO {
-    private OrderDTO order;
+    private Integer orderId;
     private ProductDTO product;
     @NotNull
     private Integer amount;
@@ -19,5 +19,6 @@ public class OrderDetailDTO {
     private Double subtotal;
     @NotNull
     private Double productPrice;
+
 
 }

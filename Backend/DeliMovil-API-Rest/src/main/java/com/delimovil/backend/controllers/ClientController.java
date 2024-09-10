@@ -32,7 +32,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public  ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientLoginDTO client){
+    public  ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientRequestDTO client){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
     }
 

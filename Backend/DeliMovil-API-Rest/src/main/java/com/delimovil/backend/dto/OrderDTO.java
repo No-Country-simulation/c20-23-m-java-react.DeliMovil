@@ -1,8 +1,6 @@
 package com.delimovil.backend.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,7 +20,6 @@ public class OrderDTO {
     @Min(1)
     private Integer id;
 
-    @NotNull
     private Double total;
 
     private DeliveryDTO delivery;
@@ -29,8 +27,8 @@ public class OrderDTO {
     private ClientDTO client;
 
     private LocalDTO local;
-    @NotNull
-    private Date date;
+
+    private LocalDateTime date;
     @NotBlank
     private String state;
     private List<OrderDetailDTO> orderDetails;

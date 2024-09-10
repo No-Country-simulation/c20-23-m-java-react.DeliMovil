@@ -14,7 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OrderDetailRequestDTO {
     @NotNull
-    private OrderDetailPKRequestDTO id;
+    @Min(1)
+    private Integer productId;
     @NotNull
     @Min(1)
     private Integer amount;

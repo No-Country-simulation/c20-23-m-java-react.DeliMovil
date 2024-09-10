@@ -3,7 +3,9 @@ package com.delimovil.backend.models.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@Table(name = "order_table")
 public class Order {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -30,7 +33,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "local_id")
     private Local local;
-    private Date date;
+    private LocalDateTime date;
     @Column(length = 45)
     private String state;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)

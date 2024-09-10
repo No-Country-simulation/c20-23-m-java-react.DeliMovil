@@ -42,7 +42,7 @@ public class DeliveryServiceImpl implements IDeliveryService {
 
     @Override
     @Transactional
-    public DeliveryDTO save(DeliveryLoginDTO deliveryDTO) {
+    public DeliveryDTO save(DeliveryRequestDTO deliveryDTO) {
         Delivery delivery = mapper.map(deliveryDTO, Delivery.class);
         Delivery savedDelivery = this.deliveryRepo.save(delivery);
         return mapper.map(savedDelivery, DeliveryDTO.class);

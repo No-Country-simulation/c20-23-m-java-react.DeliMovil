@@ -17,15 +17,18 @@ public class OrderDetail {
     private OrderDetailPK id;
 
     @ManyToOne
-    @MapsId("productId")
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @ManyToOne
+    @MapsId("productId")
+    @JoinColumn(name = "product_id")
+    private Product product;
     private Integer amount;
     private Double subtotal;
     private Double productPrice;
+
+    public OrderDetail(Order order, Product product) {
+    }
 }

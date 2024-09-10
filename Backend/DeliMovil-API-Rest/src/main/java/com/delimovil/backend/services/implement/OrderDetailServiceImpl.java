@@ -3,6 +3,7 @@ package com.delimovil.backend.services.implement;
 import com.delimovil.backend.dto.OrderDetailDTO;
 import com.delimovil.backend.dto.OrderDetailPKRequestDTO;
 import com.delimovil.backend.dto.OrderDetailRequestDTO;
+import com.delimovil.backend.dto.ProductDTO;
 import com.delimovil.backend.models.entity.OrderDetail;
 import com.delimovil.backend.models.entity.OrderDetailPK;
 import com.delimovil.backend.repositories.IOrderDetailRepository;
@@ -29,19 +30,50 @@ public class OrderDetailServiceImpl  implements IOrderDetailService {
     public List<OrderDetailDTO> findAll() {
         return orderDetailRepo.findAll()
                 .stream()
-                .map(orderDetail -> mapper.map(orderDetail, OrderDetailDTO.class))
+                .map(orderDetail -> {
+                    OrderDetailDTO dto = new OrderDetailDTO();
+                    dto.setOrderId(orderDetail.getId().getOrderId());
+                    dto.setAmount(orderDetail.getAmount());
+                    dto.setSubtotal(orderDetail.getSubtotal());
+                    dto.setProductPrice(orderDetail.getProductPrice());
+                    dto.setProduct(mapper.map(orderDetail.getProduct(), ProductDTO.class)); // Mapea el producto si es necesario
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public OrderDetailDTO findById(OrderDetailPKRequestDTO idDTO) {
-        OrderDetailPK id = mapper.map(idDTO, OrderDetailPK.class);
+        // Convertir el DTO a una clave compuesta
+        OrderDetailPK id = new OrderDetailPK(idDTO.getOrderId(), idDTO.getProductId());
+
+        // Buscar el OrderDetail en la base de datos
         OrderDetail orderDetail = orderDetailRepo.findById(id).orElseThrow(
-                () -> new CompositeKeyNotFoundException(id ,OrderDetail.class.getSimpleName())
+                () -> new CompositeKeyNotFoundException(id, OrderDetail.class.getSimpleName())
         );
-        return mapper.map(orderDetail, OrderDetailDTO.class);
+
+        // Crear un nuevo OrderDetailDTO y mapear los valores manualmente
+        OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+
+        // Asignar los valores de OrderDetail a OrderDetailDTO
+        orderDetailDTO.setOrderId(orderDetail.getOrder().getId());
+        orderDetailDTO.setAmount(orderDetail.getAmount());
+        orderDetailDTO.setSubtotal(orderDetail.getSubtotal());
+        orderDetailDTO.setProductPrice(orderDetail.getProductPrice());
+
+        // Mapear manualmente el ProductDTO
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(orderDetail.getProduct().getId());
+        productDTO.setName(orderDetail.getProduct().getName());
+        productDTO.setPrice(orderDetail.getProduct().getPrice()); // Asignar manualmente el precio del producto
+
+        // Asignar el ProductDTO al OrderDetailDTO
+        orderDetailDTO.setProduct(productDTO);
+
+        return orderDetailDTO;
     }
+
 
 
     @Override
