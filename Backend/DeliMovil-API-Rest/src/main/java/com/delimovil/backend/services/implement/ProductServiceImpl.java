@@ -46,6 +46,10 @@ public class ProductServiceImpl implements IProductService {
                 .map(res -> mapper.map(res, ProductDTO.class))
                 .collect(Collectors.toList());
 
+        for (ProductDTO productDTO : productDTOList) {
+            this.findCategories(productDTO);
+        }
+
         return productDTOList;
     }
 
@@ -121,16 +125,16 @@ public class ProductServiceImpl implements IProductService {
 
     }
 
-    private ProductDTO findCategories(ProductDTO productDTO) {
-        List<CategoryDto> categories;
+    private void findCategories(ProductDTO productDTO) {
         try{
-            categories = this.categoryService.getCategoriesByProductId(productDTO.getId());
-        }catch (ModelNotFoundException ex){
-            categories = null;
+            productDTO.setCategories(this.categoryService.getCategoriesByProductId(productDTO.getId()));
+        }catch (ModelNotFoundException ignored){
         }
-
-        productDTO.setCategories(categories);
-        return productDTO;
     }
+    /*private void findCategories(ProductDTO productDTO) {
+        List<CategoryDto> categories = this.categoryService.getCategoriesByProductId(productDTO.getId());
+        productDTO.setCategories(categories.isEmpty() ? null : categories); // O puedes mantener una lista vacía si lo prefieres.
+    }*/
+
 
 }
