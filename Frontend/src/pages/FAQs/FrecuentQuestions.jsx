@@ -1,95 +1,67 @@
 import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Container } from '@mui/material';
+import { Collapse, Container, Divider, List, ListItemButton, ListItemText } from '@mui/material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+
+const PregFrec = [
+    {
+        pregunta: "¿Cómo creo una cuenta en DeliMovil?",
+        respuesta: "Para crear una cuenta, debe dirigirse a la sección de 'Registro' y luego rellene los campos solicitados. Necesitarás una dirección de correo electrónico."
+    },
+    {
+        pregunta: "¿Cómo realizo un pedido?",
+        respuesta: "1. Busca el restaurante de tu preferencia.\n2. Selecciona los platos que deseas.\n3. Agrega los productos al carrito.\n4. Confirma tu dirección de entrega.\n5. Selecciona el método de pago.\n6. ¡Listo! Tu pedido está en camino."
+    },
+    {
+        pregunta: "¿Cómo puedo modificar mi pedido?",
+        respuesta: "Una vez realizado el pedido, puede ser difícil modificarlo. Te recomendamos comunicarte lo antes posible con nuestro servicio al cliente a través de la web."
+    },
+    {
+        pregunta: "¿Qué métodos de pago aceptan?",
+        respuesta: "Aceptamos diversas formas de pago, como tarjetas de crédito, débito, efectivo contra entrega (en algunos casos) y billeteras virtuales."
+    },
+    {
+        pregunta: "¿Cuánto tiempo tarda en llegar mi pedido?",
+        respuesta: "El tiempo de entrega puede variar dependiendo de varios factores, como la distancia, la demanda y, la disponibilidad del restaurante y del delivery. Puedes estimar el tiempo aproximado al realizar tu pedido."
+    },
+    {
+        pregunta: "¿Qué hago si mi pedido llega tarde o incompleto?",
+        respuesta: "Si tu pedido llega tarde o incompleto, por favor, comunícate con nuestro servicio al cliente a través de la web. Te brindaremos una solución lo antes posible."
+    }
+]
 
 const FrecuentQuestions = () => {
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+    const [open, setOpen] = React.useState(new Array(PregFrec.length).fill(false));
 
-  return (
-    <Container sx={{ paddingTop: '150px' }}>
-        <Typography sx={{}}>Preguntas Frecuentes</Typography>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            General settings
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Users</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            You are currently not an owner
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-            varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-            laoreet.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            Advanced settings
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            Filtering has been entirely disabled for whole web server
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-            amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Personal data</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-            amet egestas eros, vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </Container>
-  );
+    const handleClick = (index) => {
+        const newOpen = [...open];
+        newOpen[index] = !newOpen[index];
+        setOpen(newOpen);
+    }
+
+    return (
+        <Container sx={{ paddingTop: '150px', }}>
+            {PregFrec.map((e, index) => (
+                <List key={index}
+                    sx={{ width: '100%', borderRadius: '10px' }}
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                >
+                    <ListItemButton key={index} onClick={() => handleClick(index)} >
+                        <ListItemText primary={e.pregunta} />
+                        {open[index] ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                    <Collapse in={open[index]} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemText primary={e.respuesta} />
+                            </ListItemButton>
+                        </List>
+                    </Collapse>
+                </List>
+            ))}
+        </Container>
+    );
 }
 
 export default FrecuentQuestions;
