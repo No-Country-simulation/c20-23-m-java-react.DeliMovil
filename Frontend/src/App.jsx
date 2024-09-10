@@ -15,6 +15,7 @@ import { Login } from "./pages/Login";
 import Checkout from "./components/Cart-Checkout/Checkout";
 import Cart from "./components/Cart-Checkout/Cart.jsx";
 import FrecuentQuestions from "./pages/FAQs/FrecuentQuestions.jsx";
+import { NotFound } from "./components/NotFound.jsx";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -49,6 +50,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/frecuentquestions" element={<FrecuentQuestions />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Foot />
       </ThemeProvider>
