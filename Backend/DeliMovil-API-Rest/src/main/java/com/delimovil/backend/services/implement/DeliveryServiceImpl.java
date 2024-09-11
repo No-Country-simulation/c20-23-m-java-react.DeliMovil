@@ -11,6 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +23,8 @@ public class DeliveryServiceImpl implements IDeliveryService {
     private ModelMapper mapper;
     @Autowired
     private IDeliveryRepository deliveryRepo;
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     @Override
     @Transactional(readOnly = true)
@@ -42,15 +46,17 @@ public class DeliveryServiceImpl implements IDeliveryService {
 
     @Override
     @Transactional
-    public DeliveryDTO save(DeliveryRequestDTO deliveryDTO) {
+    public DeliveryDTO save(DeliveryRequestDTO deliveryDTO, MultipartFile image) {
         Delivery delivery = mapper.map(deliveryDTO, Delivery.class);
+        String imageUrl = cloudinaryService.uploadFile(image);
+        delivery.setImageUrl(imageUrl);
         Delivery savedDelivery = this.deliveryRepo.save(delivery);
         return mapper.map(savedDelivery, DeliveryDTO.class);
     }
 
     @Override
     @Transactional
-    public DeliveryDTO update(DeliveryRequestDTO deliveryDTO, Integer id) {
+    public DeliveryDTO update(DeliveryRequestDTO deliveryDTO, MultipartFile image, Integer id) {
         Delivery deliveryDB = this.deliveryRepo.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Delivery.class.getSimpleName())
         );
@@ -60,6 +66,10 @@ public class DeliveryServiceImpl implements IDeliveryService {
         deliveryDB.setUserName(deliveryDTO.getUserName());
         deliveryDB.setFirstName(deliveryDTO.getFirstName());
         deliveryDB.setLastName(deliveryDTO.getLastName());
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadFile(image);
+            deliveryDB.setImageUrl(imageUrl);
+        }
         Delivery updatedDelivery = this.deliveryRepo.save(deliveryDB);
         return mapper.map(updatedDelivery, DeliveryDTO.class);
     }

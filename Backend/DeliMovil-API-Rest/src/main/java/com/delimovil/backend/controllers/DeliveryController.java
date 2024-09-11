@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,16 +32,19 @@ public class DeliveryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DeliveryDTO> createDelivery(@Valid @RequestBody DeliveryRequestDTO delivery){
-        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryService.save(delivery));
+    public ResponseEntity<DeliveryDTO> createDelivery(
+            @RequestPart("delivery") DeliveryRequestDTO delivery,
+            @RequestPart("image") MultipartFile image){
+        return ResponseEntity.status(HttpStatus.CREATED).body(deliveryService.save(delivery, image));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<DeliveryDTO> updateDelivery(
-            @RequestBody DeliveryRequestDTO delivery,
+            @RequestPart("delivery") DeliveryRequestDTO delivery,
+            @RequestPart("image") MultipartFile image,
             @PathVariable @Min(1) Integer id
     ){
-        return ResponseEntity.ok(deliveryService.update(delivery, id));
+        return ResponseEntity.ok(deliveryService.update(delivery,image, id));
     }
 
     @DeleteMapping("/{id}")
