@@ -42,7 +42,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     @Transactional
-    public ClientDTO save(ClientLoginDTO clientDto) {
+    public ClientDTO save(ClientRequestDTO clientDto) {
         Client client = mapper.map(clientDto, Client.class);
         Client saveClient = this.clientRepo.save(client);
         return mapper.map(saveClient, ClientDTO.class);

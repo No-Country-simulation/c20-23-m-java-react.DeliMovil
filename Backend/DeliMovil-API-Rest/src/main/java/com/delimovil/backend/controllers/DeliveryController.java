@@ -31,7 +31,7 @@ public class DeliveryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DeliveryDTO> createDelivery(@Valid @RequestBody DeliveryLoginDTO delivery){
+    public ResponseEntity<DeliveryDTO> createDelivery(@Valid @RequestBody DeliveryRequestDTO delivery){
         return ResponseEntity.status(HttpStatus.CREATED).body(deliveryService.save(delivery));
     }
 
