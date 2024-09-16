@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home.jsx";
 import "./Styles/App.css";
-import Foot from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,8 +12,9 @@ import ListRestaurants from "./pages/Restaurant/ListRestaurants.jsx";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import Checkout from "./components/Cart-Checkout/Checkout";
-import Cart from "./components/Cart-Checkout/Cart";
-
+import Cart from "./components/Cart-Checkout/Cart.jsx";
+import FrecuentQuestions from "./pages/FAQs/FrecuentQuestions.jsx";
+import { NotFound } from "./components/NotFound.jsx";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -41,8 +41,6 @@ function App() {
             {darkMode ? <WbSunnyRoundedIcon /> : <ModeNightRoundedIcon />}
           </IconButton>
         </div>
-    
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/listrestaurants" element={<ListRestaurants />} />
@@ -50,8 +48,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/frecuentquestions" element={<FrecuentQuestions />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-        <Foot />
       </ThemeProvider>
     </Router>
   );
