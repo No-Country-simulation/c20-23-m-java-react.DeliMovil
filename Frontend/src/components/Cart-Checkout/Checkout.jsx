@@ -49,7 +49,8 @@ function Checkout() {
        padding:3, 
        borderRadius:2, 
        maxWidth:600, 
-       margin:'0 auto' }}>
+       margin:'20px',
+        }}>
       <Typography variant="h5" component="h2" 
       sx={{
         marginBottom:2,
