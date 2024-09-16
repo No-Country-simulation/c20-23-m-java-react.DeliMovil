@@ -7,7 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   Box,
@@ -26,6 +26,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const ListRestaurants = () => {
   //para cuando le doy click a un boton ej: onClick={() => navigate(`/editCategory/${params.row.id}`)}
   const navigate = useNavigate();
+  // const params = useParams();
   const [restaurants, setRestaurants] = React.useState([]);
   const [originalRestaurant, setOriginalRestaurant] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
@@ -67,12 +68,13 @@ const ListRestaurants = () => {
   React.useEffect(() => {
     searchValue.length > 0
       ? setRestaurants(
-          restaurants.filter((restaurants) =>
-            restaurants.name.toLowerCase().includes(searchValue.toLowerCase())
-          )
+        restaurants.filter((restaurants) =>
+          restaurants.name.toLowerCase().includes(searchValue.toLowerCase())
         )
+      )
       : setRestaurants(originalRestaurant);
   }, [searchValue, restaurants, originalRestaurant]);
+  // console.log(restaurants)
 
   /*
   useEffect(() => {
@@ -109,6 +111,14 @@ const ListRestaurants = () => {
     setSearchValue(e.target.value);
   };
 
+  const handleClick = (restaurants) => {
+    if (restaurants.id) {
+      navigate(`/products/${restaurants.id}`);
+    } else {
+      console.log('no hay id');
+    }
+  }
+
   return (
     <>
       <Container
@@ -120,7 +130,7 @@ const ListRestaurants = () => {
           sx={{
             display: "flex",
             alignItems: "flex-end",
-           // backgroundColor: "#4361EE",
+            // backgroundColor: "#4361EE",
             borderRadius: 1,
             //margin: 1,
             width: "100%",
@@ -134,7 +144,7 @@ const ListRestaurants = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <SearchIcon/>
+                  <SearchIcon />
                 </InputAdornment>
               ),
             }}
@@ -161,7 +171,8 @@ const ListRestaurants = () => {
               <ListItem
                 key={e.id}
                 alignItems="flex-start"
-                // onChange={handleSearchChange}
+                onClick={() => handleClick(e)}
+              // onChange={handleSearchChange}
               >
                 <ListItemAvatar sx={{ width: 56, height: 56 }}>
                   <Avatar
@@ -172,7 +183,7 @@ const ListRestaurants = () => {
                 </ListItemAvatar>
                 <ListItemText
                   primary={e.name}
-                  onClick={() => navigate(`/restaurant`)}
+
                   secondary={
                     <React.Fragment>
                       <Typography
@@ -187,7 +198,6 @@ const ListRestaurants = () => {
                     </React.Fragment>
                   }
                 ></ListItemText>
-
                 <Box sx={{ "& > legend": { mt: 1 } }}>
                   <Typography component="legend">Controlled</Typography>
                   <Rating
