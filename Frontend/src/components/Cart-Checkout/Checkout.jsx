@@ -1,5 +1,5 @@
-import { Container, Typography, Button, List, ListItem, Box, TextField } from '@mui/material';
 import React, { useContext, useState } from 'react';
+import { Container, Typography, Button, List, ListItem, Box, TextField } from '@mui/material';
 import { Link as MuiLink } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -10,17 +10,16 @@ import { useTheme } from '@mui/material/styles';
 
 
 
+
+
 function Checkout() {
   const [showDatosPersonales, setShowDatosPersonales] = useState(false);
   const [showEntrega, setShowEntrega] = useState(false);
   const [showPago, setShowPago] = useState(false);
   const [showCouponInput, setShowCouponInput] = useState(false)
   
-
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
-
-  
 
   return (
     <>
@@ -192,11 +191,14 @@ function Checkout() {
         fontSize:'1.5rem',
         marginBottom:'10px'}}>Resumen de la compra</Typography>
 
-      <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-        
-      </Typography>
       
-      <Typography variant="body1">
+        <Typography variant="body1" sx={{ marginBottom: '10px' }}>
+          
+        </Typography>
+      
+      
+      
+      <Typography variant="body1" sx={{ marginTop:'10px', color: isDarkMode ? '#fff' : '#000'}}>
         
       </Typography>
 

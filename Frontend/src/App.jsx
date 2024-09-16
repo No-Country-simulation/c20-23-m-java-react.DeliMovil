@@ -13,7 +13,8 @@ import ListRestaurants from "./pages/Restaurant/ListRestaurants.jsx";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import Checkout from "./components/Cart-Checkout/Checkout";
-import Cart from "./components/Cart-Checkout/Cart.jsx";
+import Cart from "./components/Cart-Checkout/Cart";
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -29,6 +30,7 @@ function App() {
   };
 
   return (
+    
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -39,6 +41,7 @@ function App() {
             {darkMode ? <WbSunnyRoundedIcon /> : <ModeNightRoundedIcon />}
           </IconButton>
         </div>
+    
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
