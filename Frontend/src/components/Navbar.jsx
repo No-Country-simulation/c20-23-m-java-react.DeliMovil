@@ -16,6 +16,67 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+const useSearchLogic = (initialRestaurants = []) => {
+  const [restaurants, setRestaurants] = useState(initialRestaurants);
+  const [originalRestaurant, setOriginalRestaurant] =
+    useState(initialRestaurants);
+  const [searchValue, setSearchValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [debounceTimeout, setDebounceTimeout] = useState(null);
+
+  // Simulate fetching restaurants (if needed)
+  useEffect(() => {
+    if (initialRestaurants.length === 0) {
+      // Fetch restaurant data from API if not provided initially
+      // getRestaurant().then((res) => {
+      //   setRestaurants(res.data);
+      //   setOriginalRestaurant(res.data);
+      // });
+    }
+  }, [initialRestaurants]);
+
+  useEffect(() => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    const newTimeout = setTimeout(() => {
+      if (searchValue.trim() === "") {
+        // If search is empty, reset the list
+        setRestaurants(originalRestaurant);
+        setErrorMessage(null);
+      } else {
+        const filteredRestaurants = originalRestaurant.filter((restaurant) =>
+          restaurant.name.toLowerCase().includes(searchValue.toLowerCase())
+        );
+
+        if (filteredRestaurants.length === 0) {
+          setErrorMessage("No se encontraron resultados para tu búsqueda.");
+        } else {
+          setRestaurants(filteredRestaurants);
+          setErrorMessage(null);
+        }
+      }
+    }, 500); // Debounce delay of 500ms
+
+    setDebounceTimeout(newTimeout);
+
+    return () => clearTimeout(debounceTimeout); // Clean up on unmount
+  }, [searchValue, originalRestaurant]);
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  return {
+    restaurants,
+    searchValue,
+    handleSearchChange,
+    errorMessage,
+  };
+};
 
 // Styled components
 const StyledInputBase = styled(InputBase)(({ theme }) => ({

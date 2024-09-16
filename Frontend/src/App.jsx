@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home.jsx";
 import "./Styles/App.css";
-import Foot from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -41,7 +40,6 @@ function App() {
             {darkMode ? <WbSunnyRoundedIcon /> : <ModeNightRoundedIcon />}
           </IconButton>
         </div>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/listrestaurants" element={<ListRestaurants />} />
@@ -52,7 +50,6 @@ function App() {
           <Route path="/frecuentquestions" element={<FrecuentQuestions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Foot />
       </ThemeProvider>
     </Router>
   );
