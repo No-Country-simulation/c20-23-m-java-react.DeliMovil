@@ -1,12 +1,29 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Container, Box, Link as MuiLink } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { loginUser } from './LoginAPI';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    try {
+      const response = await loginUser(email, password);
+      if (response.status === 200) {
+        setSuccess('Login exitoso');
+        setError('');
+      } else {
+        setError('Error al loguearse');
+        setSuccess('');
+      }
+    } catch (error) {
+      setError('Error en la solicitud');
+      setSuccess('');
+    }
+
     setEmail('');
     setPassword('');
   };

@@ -1,6 +1,6 @@
 import BASE_URL from "../configAxios";
 
-const loginUser = async (username, password) => {
+export const loginUser = async (username, password) => {
     try {
       const response = await BASE_URL.post('/login', {
         username: username,
