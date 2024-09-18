@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,16 +33,19 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public  ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientLoginDTO client){
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client));
+    public  ResponseEntity<ClientDTO> createClient(
+            @RequestPart("client") ClientRequestDTO client,
+            @RequestPart("image") MultipartFile image){
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(client, image));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<ClientDTO> updateClient(
-            @RequestBody ClientRequestDTO client,
+            @RequestPart("client") ClientRequestDTO client,
+            @RequestPart("image") MultipartFile image,
             @PathVariable @Min(1) Integer id
     ){
-        return ResponseEntity.ok(clientService.update(client, id));
+        return ResponseEntity.ok(clientService.update(client, image, id));
     }
 
 

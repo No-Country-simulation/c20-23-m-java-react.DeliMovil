@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,8 @@ public class ClientServiceImpl implements IClientService {
     private IClientRepository clientRepo;
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private CloudinaryService cloudinaryService;
     @Override
     @Transactional(readOnly = true)
     public List<ClientDTO> findAll() {
@@ -42,15 +45,17 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     @Transactional
-    public ClientDTO save(ClientLoginDTO clientDto) {
+    public ClientDTO save(ClientRequestDTO clientDto, MultipartFile image) {
         Client client = mapper.map(clientDto, Client.class);
+        String imageUrl = cloudinaryService.uploadFile(image);
+        client.setImageUrl(imageUrl);
         Client saveClient = this.clientRepo.save(client);
         return mapper.map(saveClient, ClientDTO.class);
     }
 
     @Override
     @Transactional
-    public ClientDTO update(ClientRequestDTO clientDTO, Integer id) {
+    public ClientDTO update(ClientRequestDTO clientDTO, MultipartFile image, Integer id) {
         Client clientBD = this.clientRepo.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Client.class.getSimpleName())
         );
@@ -65,7 +70,10 @@ public class ClientServiceImpl implements IClientService {
         clientBD.setUserName(clientDTO.getUserName());
         clientBD.setPassword(clientDTO.getPassword());
         clientBD.setEmail(clientDTO.getEmail());
-  
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadFile(image);
+            clientBD.setImageUrl(imageUrl);
+        }
         Client updatedClient = this.clientRepo.save(clientBD);
         return mapper.map(updatedClient, ClientDTO.class);
     }

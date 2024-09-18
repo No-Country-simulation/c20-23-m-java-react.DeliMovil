@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,16 +31,20 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductRequestDTO product) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
+    public ResponseEntity<ProductDTO> createProduct(
+            @RequestPart("product") ProductRequestDTO product,
+            @RequestPart("image") MultipartFile image
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product, image));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProduct(
-            @RequestBody ProductRequestDTO product,
+            @RequestPart("product") ProductRequestDTO product,
+            @RequestPart(value = "image", required = false) MultipartFile image,
             @PathVariable @Min(1) Integer id
     ) {
-        return ResponseEntity.ok(productService.update(product, id));
+        return ResponseEntity.ok(productService.update(product, image, id));
     }
 
     //Para asignar una categoria a producto
