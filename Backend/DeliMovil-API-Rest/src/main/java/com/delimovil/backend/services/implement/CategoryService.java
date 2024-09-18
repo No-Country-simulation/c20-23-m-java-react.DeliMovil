@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class CategoryService implements ICategoryService {
     @Autowired
     private ICategoryRepository categoryRepository;
     @Autowired
-    private IProductCategoryRepository product_categoryRepository;
+    private IProductCategoryRepository productCategoryRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -88,15 +89,25 @@ public class CategoryService implements ICategoryService {
         categoryRepository.delete(category);
 
     }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<CategoryDto> getCategoriesByProductId(Integer productId) throws ModelNotFoundException{
+//        List<Category> categories = productCategoryRepository.findCategoriesByProductId(productId);
+//        if (categories.isEmpty()){
+//            throw new ModelNotFoundException(productId, "Categories with that product");
+//        }
+//        return categories.stream()
+//                .map(category -> modelMapper.map(category, CategoryDto.class))
+//                .collect(Collectors.toList());
+//    }
     @Override
     @Transactional(readOnly = true)
     public List<CategoryDto> getCategoriesByProductId(Integer productId) {
-        List<Category> categories = product_categoryRepository.findCategoriesByProductId(productId);
-        if (categories.isEmpty()){
-            throw new ModelNotFoundException(productId, "Categories with that product");
-        }
-        return categories.stream()
-                .map(category -> modelMapper.map(category, CategoryDto.class))
-                .collect(Collectors.toList());
+        List<Category> categories = productCategoryRepository.findCategoriesByProductId(productId);
+        return categories.isEmpty() ? Collections.emptyList() :
+                categories.stream()
+                        .map(category -> modelMapper.map(category, CategoryDto.class))
+                        .collect(Collectors.toList());
     }
+
 }
