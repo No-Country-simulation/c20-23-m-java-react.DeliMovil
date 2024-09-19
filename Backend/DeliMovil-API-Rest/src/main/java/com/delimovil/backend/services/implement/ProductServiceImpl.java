@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private CloudinaryService cloudinaryService;
     
     @Override
     @Transactional(readOnly = true)
@@ -68,12 +71,16 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     @Transactional
-    public ProductDTO save(ProductRequestDTO productDTO) {
+    public ProductDTO save(ProductRequestDTO productDTO, MultipartFile image) {
         RestaurantDTO restaurantDTO = restaurantService.findById(productDTO.getIdRestaurant());
 
         Product product = mapper.map(productDTO, Product.class);
         product.setRestaurant( mapper.map(restaurantDTO, Restaurant.class) );
         product.setId(null);
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadFile(image);
+            product.setImageUrl(imageUrl);
+        }
         Product saveProduct = this.productRepository.save(product);
 
         return mapper.map(saveProduct, ProductDTO.class);
@@ -81,14 +88,18 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     @Transactional
-    public ProductDTO update(ProductRequestDTO productDTO, Integer id) {
+    public ProductDTO update(ProductRequestDTO productDTO, MultipartFile image, Integer id) {
         Product productBD = this.productRepository.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Product.class.getSimpleName())
         );
 
         productBD.setName(productDTO.getName());
         productBD.setDescription(productDTO.getDescription());
-
+        productBD.setPrice(productDTO.getPrice());
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadFile(image);
+            productBD.setImageUrl(imageUrl);
+        }
         Product updatedProduct = this.productRepository.save(productBD);
 
         return mapper.map(updatedProduct, ProductDTO.class);

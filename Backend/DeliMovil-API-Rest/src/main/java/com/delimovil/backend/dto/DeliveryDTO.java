@@ -1,5 +1,6 @@
 package com.delimovil.backend.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +34,6 @@ public class DeliveryDTO {
     @Size(min = 12, max = 45)
     @Email
     private String email;
+    @Size(min = 3, max = 250)
+    private String imageUrl;
 }

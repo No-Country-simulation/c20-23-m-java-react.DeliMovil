@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     @Override
     @Transactional(readOnly = true)
@@ -46,8 +49,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Override
     @Transactional
-    public RestaurantDTO save(RestaurantCreateDTO restaurantDTO) {
+    public RestaurantDTO save(RestaurantCreateDTO restaurantDTO, MultipartFile image) {
+        String imageUrl = cloudinaryService.uploadFile(image);
         Restaurant restaurant = mapper.map(restaurantDTO, Restaurant.class);
+        restaurant.setImageUrl(imageUrl);
         Restaurant saveRestaurant = this.restaurantRepository.save(restaurant);
 
         return mapper.map(saveRestaurant, RestaurantDTO.class);
@@ -55,13 +60,18 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
     @Override
     @Transactional
-    public RestaurantDTO update(ResturantRequestDTO restaurantDTO, Integer id) {
+    public RestaurantDTO update(ResturantRequestDTO restaurantDTO, MultipartFile image, Integer id) {
         Restaurant restaurantBD = this.restaurantRepository.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(id, Restaurant.class.getSimpleName())
         );
 
         restaurantBD.setName(restaurantDTO.getName());
         restaurantBD.setDescription(restaurantDTO.getDescription());
+
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadFile(image);
+            restaurantBD.setImageUrl(imageUrl);
+        }
 
         Restaurant updatedRestaurant = this.restaurantRepository.save(restaurantBD);
 

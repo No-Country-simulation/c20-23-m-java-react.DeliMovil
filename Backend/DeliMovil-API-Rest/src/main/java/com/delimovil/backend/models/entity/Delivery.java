@@ -26,6 +26,7 @@ public class Delivery {
     private String password;
     @Column(length = 45)
     private String email;
-
+    @Column(length = 250)
+    private String imageUrl;
 
 }

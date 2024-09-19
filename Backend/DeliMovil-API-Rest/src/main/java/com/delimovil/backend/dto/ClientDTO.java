@@ -57,4 +57,6 @@ public class ClientDTO {
     @NotBlank
     @Size(min = 12, max = 45)
     private String email;
+    @Size(min = 3, max = 250)
+    private String imageUrl;
 }

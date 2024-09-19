@@ -29,4 +29,6 @@ public class Product {
 
 //    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<ProductCategory> productCategories = new HashSet<>();
+
+    private String imageUrl;
 }
