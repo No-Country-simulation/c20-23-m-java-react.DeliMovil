@@ -1,31 +1,34 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Container, Box, Link as MuiLink } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { loginUser } from './LoginAPI';
+import { useNavigate} from "react-router-dom";
+import BASE_URL from "../configAxios";
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const loginUser = async (email, password) => {
     try {
-      const response = await loginUser(email, password);
+      const response = await BASE_URL.get(`/api/client/login`, {
+        params: {
+          email: email,
+          password: password,
+        },
+      });
+  
       if (response.status === 200) {
-        setSuccess('Login exitoso');
-        setError('');
+        console.log('Login exitoso');
+        localStorage.setItem('userData', JSON.stringify(response.data));  
+        console.log(response.data);
+        navigate('/');
       } else {
-        setError('Error al loguearse');
-        setSuccess('');
+        console.log('Error al loguearse');
       }
     } catch (error) {
-      setError('Error en la solicitud');
-      setSuccess('');
+      console.error('Error en la solicitud GET:', error);
     }
-
-    setEmail('');
-    setPassword('');
   };
 
   return (
@@ -119,7 +122,7 @@ export const Login = () => {
           <Button
             fullWidth
             variant="contained"
-            onClick={handleLogin}
+            onClick={() => loginUser(email, password)}  // Asegurarte de pasar los parámetros
             sx={{
               backgroundColor: '#007bff',
               '&:hover': {
