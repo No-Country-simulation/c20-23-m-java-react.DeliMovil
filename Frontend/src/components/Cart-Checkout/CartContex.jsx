@@ -7,6 +7,8 @@ export const CartProvider = ({ children }) => {
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
 
+  
+
   const addToCart = (product, quantity) => {
     setCartItems([...cartItems,{product, quantity}]);
    

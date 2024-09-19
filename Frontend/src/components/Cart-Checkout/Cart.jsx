@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardMedia, Typography, Button, IconButton, Box } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LogoDeliMovil from '../../assets/DeliMovil.webp';
+import MediosDePago from '../../assets/mediosdepago.png'
 
 const Cart = ({ onCheckout }) => {
   const [products, setProducts] = useState([
@@ -36,7 +36,15 @@ const Cart = ({ onCheckout }) => {
   };
 
   return (
-    <Box sx={{width:'100%', position: 'relative'}}>
+    <Box sx={{
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+      width:'100%',
+      padding:'2rem'
+      // width:'100%', 
+      // position: 'relative',
+    }}>
       <IconButton
         onClick={() => setCartOpen(!cartOpen)}
         size='large'
@@ -48,16 +56,23 @@ const Cart = ({ onCheckout }) => {
         <Box sx={{
           position: 'absolute',
           top: 60,
-          right: 0,
+          left: '40%',
           width: 400,
           padding: '16px',
           backgroundColor: 'background.paper',
-          borderRadius: 1,
-          boxShadow: 3,
+          borderRadius: 2,
+          boxShadow: 5,
+          transition:'all 0.3s ease-in-out',
           maxHeight: '80vh',
           overflowY: 'auto'
         }}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom
+          sx={{
+            textAlign:'center',
+            color:'white',
+            fontWeight:'bold',
+            fontSize:'1.5rem'
+          }}>
             Mi pedido
           </Typography>
           {products.length === 0 ? (
@@ -112,8 +127,15 @@ const Cart = ({ onCheckout }) => {
 
               
               <Box sx={{ mt: 2, borderTop: '1px solid', borderColor: 'divider', paddingTop: 2 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="h6">Total: ${getTotal()}</Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  <Typography variant="h6"
+                  sx ={{
+                    fontWeight:'bold',
+                    padding:'5px',
+                    borderRadius:'10px',
+                    backgroundColor:'#258d19'
+                  }}
+                  >Total: ${getTotal()}</Typography>
                 </Box>
 
                 <Box sx={{ mt: 2, textAlign: 'center' }}>
@@ -126,8 +148,49 @@ const Cart = ({ onCheckout }) => {
           )}
         </Box>
       )}
+    <Box sx={{
+      position:'absolute',
+      top:16,
+      left:16,
+      width:50,
+      borderRaduis:'50%',
+      overflow:'hidden',
+      backgroundColor:'background.paper',
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center',
+      border:'1px solid',
+      borderColor:'divider'
+    }}>
+      <img src={LogoDeliMovil} alt="logoDeliMovil" style={{
+        width:'100%',
+        height:'100%',
+        objectFit:'cover'
+      }}/>
     </Box>
+
+    <Box sx={{
+      display:'flex',
+      width:'100%',
+      maxWidth:400,
+      height:'auto',
+      marginTop:'80px',
+      padding:'16px',
+      overflow:'hidden',
+      justifyContent:'center',
+      
+    }}>
+      <img src={MediosDePago} alt="medios de pago"
+      style={{
+        maxWidth:'100%',
+        height:'auto',
+        objectFit:'contain'
+      }} />
+    </Box>
+    </Box>
+   
   );
+ 
 };
 
 export default Cart;

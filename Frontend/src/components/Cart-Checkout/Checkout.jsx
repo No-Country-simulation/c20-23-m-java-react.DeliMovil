@@ -11,15 +11,36 @@ import { useTheme } from '@mui/material/styles';
 
 
 
-
 function Checkout() {
   const [showDatosPersonales, setShowDatosPersonales] = useState(false);
   const [showEntrega, setShowEntrega] = useState(false);
   const [showPago, setShowPago] = useState(false);
   const [showCouponInput, setShowCouponInput] = useState(false)
+
+  const [email, setEmail] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [celular, setCelular] = useState('');
+  const [direccionEntrega, setDireccionEntrega] = useState('');
+  const [codigoPostal, setCodigoPostal] = useState('');
+  const [numeroTarjeta, setNumeroTarjeta] = useState('');
+  const [fechaExpiracion, setFechaExpiracion] = useState('');
+  const [codigoSeguridad, setCodigoSeguridad] = useState('');
   
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
+ 
+  
+  const handleSubmit = () => {
+    if(
+      email && nombre && apellido && direccion && celular && direccionEntrega && codigoPostal && numeroTarjeta && fechaExpiracion && codigoSeguridad
+    ) {
+      alert('¡Completaste todo con éxito');
+    } else {
+      alert('Por favor, completa todos los campos')
+    }
+  };
 
   return (
     <>
@@ -39,7 +60,8 @@ function Checkout() {
        1-EMAIL
      </Typography>
      <TextField id="outlined-basic" label="Email" variant="outlined"
-     fullWidth sx={{marginBttom:'20px', fontSize:'18px'}} />
+     fullWidth sx={{marginBttom:'20px', fontSize:'18px'}}
+     onChange={(e) => setEmail(e.target.value)} />
     
 
     <Box 
@@ -125,10 +147,33 @@ function Checkout() {
           </Typography>
       {showDatosPersonales && (
     <Box sx={{ display:'flex', flexDirection: 'column', gap:'10px', marginTop:'10px'}}>
-      <TextField label="Nombre" variant="outlined" fullWidth />
-      <TextField label="Apellido" variant="outlined" fullWidth />
-      <TextField label="Dirección" variant="outlined" fullWidth />
-      <TextField label="Celular" variant="outlined" fullWidth/>
+      <TextField 
+        label="Nombre" 
+        variant="outlined" 
+        fullWidth
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)} />
+
+      <TextField 
+        label="Apellido" 
+        variant="outlined"
+        fullWidth
+        value={apellido}
+        onChange={(e) => setApellido(e.target.value)} />
+
+      <TextField 
+        label="Dirección"
+        variant="outlined" 
+        fullWidth
+        value={direccion}
+        onChange={(e) => setDireccion(e.target.value)} />
+
+      <TextField 
+        label="Celular"  
+        variant="outlined" 
+        fullWidth
+        value={celular}
+        onChange={(e) => setCelular(e.target.value)}/>
     </Box>
     )}
     </Box>
@@ -142,8 +187,20 @@ function Checkout() {
       >3-ENTREGA {showEntrega ? <ExpandLessIcon sx={{marginLeft:1}}/>  : <ExpandMoreIcon sx={{marginLeft:1}} />}</Typography>
       {showEntrega && (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-          <TextField label="Dirección de entrega" variant="outlined" fullWidth  />
-          <TextField label="Código postal" variant="outlined" fullWidth />
+
+      <TextField 
+        label="Dirección de entrega" 
+        variant="outlined" 
+        fullWidth
+        value={direccionEntrega}
+        onChange={(e) => setDireccionEntrega(e.target.value)}  />
+        
+      <TextField 
+        label="Código postal" 
+        variant="outlined" 
+        fullWidth
+        value={codigoPostal}
+        onChange={(e) => setCodigoPostal(e.target.value)} />
         </Box>
       )}
     </Box>
@@ -157,9 +214,26 @@ function Checkout() {
     </Box>
     {showPago && (
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-        <TextField label="Número de tarjeta" variant="outlined" fullWidth/>
-        <TextField label="Fecha de expiración" variant="outlined" />
-        <TextField label="Código de seguridad" variant="outlined" fullWidth/>
+      
+      <TextField 
+        label="Número de tarjeta"  
+        variant="outlined" 
+        fullWidth
+        value={numeroTarjeta}
+        onChange={(e) => setNumeroTarjeta(e.target.value)}/>
+
+      <TextField 
+        label="Fecha de expiración" 
+        variant="outlined"
+        value={fechaExpiracion}
+        onChange={(e) => setFechaExpiracion(e.target.value)} />
+      
+      <TextField 
+        label="Código de seguridad" 
+        variant="outlined" 
+        fullWidth
+        value={codigoSeguridad}
+        onChange={(e) => setCodigoSeguridad(e.target.value)}/>
       </Box>
     )}
 
@@ -172,6 +246,7 @@ function Checkout() {
         backgroundColor:'#7cdaf9'
       }
     }}
+    onClick={handleSubmit}
     >Enviar</Button>
 
     <Box className='resumen-compra' 
@@ -194,9 +269,7 @@ function Checkout() {
 
       
         <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-          
         </Typography>
-      
       
       
       <Typography variant="body1" sx={{ marginTop:'10px', color: isDarkMode ? '#fff' : '#000'}}>
@@ -248,13 +321,13 @@ function Checkout() {
       </Box>
     )}
       
-      <Typography variant="body1" 
+      {/* <Typography variant="body1" 
       sx={{marginTop: '10px',
           color: isDarkMode ? '#fff' : '#000'
       }}>Subtotal</Typography>
       <Typography variant="body1" sx={{ marginTop:'10px',
         color: isDarkMode ? '#fff' : '#000'
-      }}>Total</Typography>
+      }}>Total</Typography> */}
     
 
     <MuiLink href="/cart"
