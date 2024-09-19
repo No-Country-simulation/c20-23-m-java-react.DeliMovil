@@ -25,8 +25,6 @@ const Restaurant = () => {
     const [cartItems, setCartItems] = React.useState([]);
     const [state, setState] = React.useState({ right: false });
 
-
-
     useEffect(() => {
         getProducts().then((res) => {
             setProduct(res.data);
@@ -96,18 +94,6 @@ const Restaurant = () => {
                 ))}
             </List>
             <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
         </Box>
     );
 
@@ -127,7 +113,7 @@ const Restaurant = () => {
                                 }}>
                                 < CardMedia
                                     sx={{ height: 140, }}
-                                    image={e.image_url}
+                                    image={e.imageUrl}
                                 />
                                 <Divider></Divider>
                                 <Box sx={{ p: 2, maxHeight: 110, minHeight: 110 }}>
@@ -151,7 +137,7 @@ const Restaurant = () => {
                                         <React.Fragment key={anchor}>
                                             <Button
                                                 variant='contained'
-                                                onClick={toggleDrawer(anchor, true)}
+                                                //  onClick={toggleDrawer(anchor, true)}
                                                 size="small"
                                                 color="primary"
                                                 sx={{
@@ -163,7 +149,8 @@ const Restaurant = () => {
                                                     border: 2,
                                                     textTransform: "none",
                                                 }}
-                                            ><Typography variant="h6" onClick={addToCart}>Comprar</Typography> </Button>
+                                            ><Typography variant="h6" //onClick={addToCart}
+                                            >Comprar</Typography> </Button>
                                             <Drawer
                                                 anchor={anchor}
                                                 open={state[anchor]}
