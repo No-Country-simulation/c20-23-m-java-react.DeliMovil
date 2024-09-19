@@ -1,8 +1,6 @@
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
-
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
@@ -11,15 +9,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   Box,
-  Button,
   Container,
-  Grid,
   InputAdornment,
   Rating,
   TextField,
   CircularProgress,
 } from "@mui/material";
-import { Add } from "@mui/icons-material";
 import { getRestaurant } from "./RestaurantAPI";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -30,34 +25,12 @@ const ListRestaurants = () => {
   const [restaurants, setRestaurants] = React.useState([]);
   const [originalRestaurant, setOriginalRestaurant] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
-  //const [row, setRow] = useState([]);
   const [value, setValue] = React.useState(2);
   const [calification, setCalification] = useState(2);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const [debounceTimeout, setDebounceTimeout] = useState(null);
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null); // Resetear el estado de error
-
-      try {
-        const response = await getRestaurant();
-        setRestaurants(response.data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-*/
   React.useEffect(() => {
     getRestaurant().then((res) => {
       setRestaurants(res.data);
@@ -74,38 +47,6 @@ const ListRestaurants = () => {
       )
       : setRestaurants(originalRestaurant);
   }, [searchValue, restaurants, originalRestaurant]);
-  // console.log(restaurants)
-
-  /*
-  useEffect(() => {
-    const handleSearch = () => {
-      if (searchValue.trim() === "") {
-        // Empty search, reset to original list and clear error
-        setRestaurants(originalRestaurant);
-        setErrorMessage(null);
-        return;
-      }
-
-      const filteredRestaurants = restaurants.filter((restaurant) =>
-        restaurant.name.toLowerCase().includes(searchValue.toLowerCase())
-      );
-
-      if (filteredRestaurants.length === 0) {
-        setErrorMessage("No se encontraron resultados para tu búsqueda.");
-      } else {
-        setRestaurants(filteredRestaurants);
-        setErrorMessage(null);
-      }
-    };
-
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout);
-    }
-
-    const newTimeout = setTimeout(handleSearch, 500); // Add a debounce delay
-    setDebounceTimeout(newTimeout);
-  }, [searchValue, restaurants, originalRestaurant]);
-*/
 
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
@@ -130,7 +71,7 @@ const ListRestaurants = () => {
           sx={{
             display: "flex",
             alignItems: "flex-end",
-            // backgroundColor: "#4361EE",
+            //backgroundColor: "#4361EE",
             borderRadius: 1,
             //margin: 1,
             width: "100%",
@@ -162,8 +103,6 @@ const ListRestaurants = () => {
         ) : (
           <List
             sx={{
-              //  width: "100%",
-              // maxWidth: "95%",
               margin: "1%",
             }}
           >
@@ -176,8 +115,8 @@ const ListRestaurants = () => {
               >
                 <ListItemAvatar sx={{ width: 56, height: 56 }}>
                   <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    // alt="Remy Sharp"
+                    src={e.image_url}
                     variant="rounded"
                   />
                 </ListItemAvatar>
@@ -188,6 +127,7 @@ const ListRestaurants = () => {
                     <React.Fragment>
                       <Typography
                         component="span"
+
                         variant="body2"
                         sx={{
                           display: "inline",
@@ -199,15 +139,6 @@ const ListRestaurants = () => {
                   }
                 ></ListItemText>
                 <Box sx={{ "& > legend": { mt: 1 } }}>
-                  <Typography component="legend">Controlled</Typography>
-                  <Rating
-                    name="simple-controlled"
-                    value={calification}
-                    onChange={(event, newValue) => {
-                      setCalification(newValue);
-                    }}
-                  />
-                  <Typography component="legend">Read only</Typography>
                   <Rating name="read-only" value={calification} readOnly />
                 </Box>
               </ListItem>
