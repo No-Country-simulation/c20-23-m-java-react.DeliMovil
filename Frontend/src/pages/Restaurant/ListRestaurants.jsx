@@ -35,9 +35,11 @@ const ListRestaurants = () => {
     getRestaurant().then((res) => {
       setRestaurants(res.data);
       setOriginalRestaurant(res.data);
+      console.log(res.data);
     });
+    
   }, []);
-
+console.log(restaurants);
   React.useEffect(() => {
     searchValue.length > 0
       ? setRestaurants(
@@ -116,7 +118,7 @@ const ListRestaurants = () => {
                 <ListItemAvatar sx={{ width: 56, height: 56 }}>
                   <Avatar
                     // alt="Remy Sharp"
-                    src={e.image_url}
+                    src={`${e.imageUrl}`}
                     variant="rounded"
                   />
                 </ListItemAvatar>
