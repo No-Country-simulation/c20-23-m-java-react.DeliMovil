@@ -32,6 +32,14 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
+    public ClientDTO findByEmailAndPassword(String email, String password) {
+        Client client = clientRepo.findByEmailAndPassword(email, password).orElseThrow(
+                () -> new ModelNotFoundException(email, Client.class.getSimpleName())
+        );
+        return mapper.map(client, ClientDTO.class);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public ClientDTO findById(Integer id) {
         Client client = clientRepo.findById(id).orElseThrow(

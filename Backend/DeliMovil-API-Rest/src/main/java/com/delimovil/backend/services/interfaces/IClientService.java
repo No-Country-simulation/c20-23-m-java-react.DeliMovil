@@ -13,7 +13,7 @@ public interface IClientService {
     public ClientDTO save(ClientLoginDTO clientDTO);
     public ClientDTO update(ClientRequestDTO clientDTO, Integer id);
     public void deleteById(Integer id);
-
+    ClientDTO findByEmailAndPassword(String email, String password);
 
     
 }

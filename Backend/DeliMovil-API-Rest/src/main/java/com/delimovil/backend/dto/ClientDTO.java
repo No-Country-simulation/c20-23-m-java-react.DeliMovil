@@ -1,5 +1,6 @@
 package com.delimovil.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.Min;
@@ -50,6 +51,7 @@ public class ClientDTO {
     private String userName;
     @NotBlank
     @Size(min = 8, max = 20)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Email
     @NotBlank

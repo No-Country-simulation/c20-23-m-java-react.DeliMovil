@@ -25,6 +25,10 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findAll());
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<ClientDTO> findByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
+        return ResponseEntity.ok(clientService.findByEmailAndPassword(email, password));
+    }
     @GetMapping("/{id}")
     public ResponseEntity<ClientDTO> findClientById(@PathVariable @Min(1) Integer id){
         return ResponseEntity.ok(clientService.findById(id));

@@ -1,21 +1,27 @@
 package com.delimovil.backend.shared.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableWebMvc
-public class CorsConfig implements WebMvcConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/*")
-                .allowedOrigins("http://localhost:5173")
+public class CorsConfig {
 
-                .allowedMethods("GET", "POST", "PATCH", "DELETE")
-                .allowedHeaders("")
-                .allowCredentials(true);
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
 
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**") // Permitir todas las rutas
+                        .allowedOrigins("http://localhost:5173") // Permitir cualquier origen
+                        .allowedMethods("*") // Permitir todos los métodos HTTP
+                        .allowedHeaders("*") // Permitir todas las cabeceras
+                        .allowCredentials(true) // Permitir credenciales
+                        .maxAge(3600); // Cache de la solicitud preflight por una hora
+            }
+        };
     }
 }
