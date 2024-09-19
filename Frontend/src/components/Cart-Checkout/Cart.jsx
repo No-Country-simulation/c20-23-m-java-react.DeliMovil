@@ -42,8 +42,7 @@ const Cart = ({ onCheckout }) => {
       alignItems:'center',
       width:'100%',
       padding:'2rem'
-      // width:'100%', 
-      // position: 'relative',
+      
     }}>
       <IconButton
         onClick={() => setCartOpen(!cartOpen)}
@@ -140,7 +139,7 @@ const Cart = ({ onCheckout }) => {
 
                 <Box sx={{ mt: 2, textAlign: 'center' }}>
                   <Button variant="contained" color="primary" onClick={handleCheckout}>
-                    Checkout
+                    ABONAR
                   </Button>
                 </Box>
               </Box>
