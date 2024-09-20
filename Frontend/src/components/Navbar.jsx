@@ -203,29 +203,29 @@ export default function Navbar() {
                 />
               </Search>
               <Button
-                // variant="text"
-                //  color="info"
-                //size="small"
-                onClick={() =>
-                  navigate(`/listrestaurants`)}
+                variant="text"
+                color="info"
+                size="medium"
+                sx={{ minWidth: 0 }}
               >
-                Restaurantes
+                <Link to={"/listrestaurants"} style={{ textDecoration: "none", color: "inherit"}}>Restaurants</Link>
+                
               </Button>
               <Button
                 variant="text"
                 color="info"
-                size="small"
+                size="medium"
                 sx={{ minWidth: 0 }}
               >
-                <Link to={"/checkout"}>Checkout</Link>
+                <Link to={"/checkout"} style={{ textDecoration: "none", color: "inherit"}}>Checkout</Link>
               </Button>
               <Button
                 variant="text"
                 color="info"
-                size="small"
+                size="medium"
                 sx={{ minWidth: 0 }}
               >
-                <Link to={"/cart"}>Cart</Link>
+                <Link to={"/cart"}  style={{ textDecoration: "none", color: "inherit"}}>Cart</Link>
               </Button>
             </Box>
           </Box>
@@ -248,10 +248,10 @@ export default function Navbar() {
             ) : (
               <>
                 <Button color="primary" variant="text" size="small">
-                  <Link to={"/login"}>Sign in</Link>
+                  <Link to={"/login"}  style={{ textDecoration: "none", color: "inherit"}}>Sign in</Link>
                 </Button>
                 <Button color="primary" variant="contained" size="small">
-                  <Link to={"/register"}>Sign up</Link>
+                  <Link to={"/register"}  style={{ textDecoration: "none", color: "inherit"}}>Sign up</Link>
                 </Button>
               </>
             )}
