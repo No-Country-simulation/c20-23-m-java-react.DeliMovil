@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const useSearchLogic = (initialRestaurants = []) => {
@@ -144,6 +144,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
@@ -168,7 +169,10 @@ export default function Navbar() {
           >
             <Box
               sx={{
-                display: { xs: "none", md: "flex" },
+                display: { //xs: "none", 
+                  md: "flex"
+
+                },
                 alignItems: "center",
                 gap: 2, // Espaciado leve entre elementos
               }}
@@ -198,8 +202,14 @@ export default function Navbar() {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
-              <Button variant="text" color="info" size="small">
-                <Link to={"/listrestaurants"}>Categorias</Link>
+              <Button
+                // variant="text"
+                //  color="info"
+                //size="small"
+                onClick={() =>
+                  navigate(`/listrestaurants`)}
+              >
+                Restaurantes
               </Button>
               <Button
                 variant="text"
@@ -229,7 +239,7 @@ export default function Navbar() {
             {isAuthenticated ? (
               <>
                 <Button color="primary" variant="text" size="small">
-                  My profile
+                  Mi Perfil
                 </Button>
                 <Button color="primary" variant="contained" size="small">
                   Sign out
